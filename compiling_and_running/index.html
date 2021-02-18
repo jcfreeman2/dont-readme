@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Compiling and Running - My Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Compiling and Running";
+    var mkdocs_page_input_path = "compiling_and_running.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> My Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../index.md">Home</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Compiling and Running</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#system-requirements">System requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setup-daq-buildtools">Setup daq-buildtools</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creating-a-development-area-aka-work-area">Creating a development area (AKA work area)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-extra-ups-products-and-product-pools">Adding extra UPS products and product pools</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#compiling">Compiling</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#working-with-more-repos">Working with more repos</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running">Running</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#next-step">Next Step</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../creating_a_new_package/">Creating A New Package</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">My Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Compiling and Running</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="getting-started">Getting started</h1>
+<h2 id="system-requirements">System requirements</h2>
+<p>To get set up, you'll need access to the ups product area <code>/cvmfs/dune.opensciencegrid.org/dunedaq/DUNE/products</code>, as is the case, e.g., on the lxplus machines at CERN. </p>
+<h2 id="setup-daq-buildtools">Setup <code>daq-buildtools</code></h2>
+<p><code>daq-buildtools</code> is a simple package that provides environment and building utilities for the DAQ Suite. 
+Each cloned daq-buildtools can serve as many work areas as the developer wishes. </p>
+<p>The repository can simply be cloned via</p>
+<pre><code class="language-bash">git clone https://github.com/DUNE-DAQ/daq-buildtools.git -b dunedaq-v2.2.0
+</code></pre>
+<p>This step doesn't have to be run more than once per daq-buildtools version. </p>
+<p>The <code>dbt</code> setup script has to be sourced to make the <code>dbt</code> scripts available in the commandline regardless of the current work directory. Run:</p>
+<pre><code class="language-bash">source daq-buildtools/dbt-setup-env.sh
+</code></pre>
+<p>..and you'll see something like:</p>
+<pre><code>Added /your/path/to/daq-buildtools/bin to PATH
+Added /your/path/to/daq-buildtools/scripts to PATH
+DBT setuptools loaded
+</code></pre>
+<p>After this step <code>daq-buildtools</code> scripts and aliases will be accessible from your commandline regardless of the current working directory. They include <code>dbt-create.sh</code>, <code>dbt-build.sh</code> and the aliases <code>dbt-setup-build-environment</code> and <code>dbt-setup-runtime-environment</code> which are used in the following sections.</p>
+<p>Each time that you want to work with a DUNE DAQ development area in a fresh Linux shell, you'll need to set up <code>daq-buildtools</code> using the <code>dbt-setup-env.sh</code> script, as described above.</p>
+<h2 id="creating-a-development-area-aka-work-area">Creating a development area (AKA work area)</h2>
+<p>Once you've sourced <code>dbt-setup-env.sh</code>, you're now ready to create a development area. Create an empty directory (give it any name, but we'll refer to it as "<code>MyTopDir</code>" on this wiki) and 'cd' into it. Then run:</p>
+<pre><code class="language-sh">dbt-create.sh &lt;release&gt;  # dunedaq-v2.2.0 is the most recent release as of Jan-20-2021
+</code></pre>
+<p>which will set up an area to place the repos you wish to build.</p>
+<pre><code class="language-txt">MyTopDir
+├── build
+├── dbt-pyvenv
+├── dbt-settings
+├── log
+└── sourcecode
+    ├── CMakeLists.txt
+    └── dbt-build-order.cmake
+</code></pre>
+<p>For the purposes of instruction, let's build the <code>listrev</code> package. Downloading it is simple:</p>
+<pre><code>cd sourcecode
+git clone https://github.com/DUNE-DAQ/listrev.git -b dunedaq-v2.2.0
+cd ..
+</code></pre>
+<p>Note the assumption above is that you aren't developing listrev; if you were, then you'd want to replace <code>-b dunedaq-v2.2.0</code> with <code>-b &lt;branch you want to work on&gt;</code>.</p>
+<h2 id="adding-extra-ups-products-and-product-pools">Adding extra UPS products and product pools</h2>
+<p>Sometimes it is necessary to tweak the baseline list of UPS products or even UPS product pools to add extra dependencies. 
+This can be easily done by editing the <code>dbt-settings</code> file generated by <code>dbt-create.sh</code> and adding the new entries to <code>dune_products_dirs</code>  and <code>dune_products</code> as needed. See "/example/of/additional/user/declared/product/pool" and "package_declared_by_user v1_2_3 e19:prof" in the example of an edited <code>dbt-settings</code> file, below:</p>
+<pre><code class="language-bash">dune_products_dirs=(
+    &quot;/cvmfs/dune.opensciencegrid.org/dunedaq/DUNE/releases/dunedaq-v2.2.0/externals&quot;
+    &quot;/cvmfs/dune.opensciencegrid.org/dunedaq/DUNE/releases/dunedaq-v2.2.0/packages&quot;
+    #&quot;/cvmfs/dune.opensciencegrid.org/dunedaq/DUNE/products&quot;
+    #&quot;/cvmfs/dune.opensciencegrid.org/dunedaq/DUNE/products_dev&quot;
+)
+
+dune_products=(
+    &quot;cmake v3_17_2&quot;
+    &quot;cetlib v3_11_01 e19:prof&quot;
+    &quot;gdb v9_2&quot;
+    &quot;TRACE v3_16_02&quot;
+    &quot;folly v2020_05_25a e19:prof&quot;
+    &quot;ers v0_26_00d e19:prof&quot;
+    &quot;nlohmann_json v3_9_0c e19:prof&quot;
+    &quot;ninja v1_10_0&quot;
+    &quot;pistache v2020_10_07 e19:prof&quot;
+    &quot;highfive v2_2_2b e19:prof&quot;
+    &quot;zmq v4_3_1b e19&quot;
+    # Note: &quot;daq_cmake&quot; with underscore is the UPS product name.
+    # One can use either &quot;daq-cmake&quot; or &quot;daq_cmake&quot; in this file.
+    &quot;daq-cmake v1_2_3 e19:prof&quot;
+    &quot;cmdlib v1_0_2b e19:prof&quot;
+    &quot;restcmd v1_0_2b e19:prof&quot;
+    &quot;appfwk v2_1_0 e19:prof&quot;
+    &quot;listrev v2_0_1b e19:prof&quot;
+    &quot;dataformats v1_0_0 e19:prof&quot;
+    &quot;dfmessages v1_0_0 e19:prof&quot;
+    &quot;dfmodules v1_1_1 e19:prof&quot;
+    &quot;trigemu v1_0_0 e19:prof&quot;
+    &quot;readout v1_0_1 e19:prof&quot;
+    &quot;minidaqapp v1_2_0 e19:prof&quot;
+    &quot;ipm v1_1_0 e19:prof&quot;
+)
+
+dune_python_version=&quot;v3_8_3b&quot;
+</code></pre>
+<p>As the names suggest, <code>dune_products_dirs</code> contains the list of UPS product pools and <code>dune_products</code> contains the list of UPS products sourced by <code>dbt-setup-build-environment</code> (described below). If you've already sourced <code>dbt-setup-build-environment</code> before editing the <code>dbt-settings</code> file, you'll need to log into a fresh shell and source <code>dbt-setup-env.sh</code> and <code>dbt-setup-build-environment</code> again. </p>
+<h2 id="compiling">Compiling</h2>
+<p>We're about to build and install the <code>listrev</code> package. (&#x1F534; Note: if you are working with other packages, have a look at the <a href="#working-with-more-repos">Working with more repos</a> subsection before running the following build command.) By default, the scripts will create a subdirectory of <code>MyTopDir</code> called <code>./install</code>and install any packages you build off your repos there. If you wish to install them in another location, you'll want to set the environment variable <code>DBT_INSTALL_DIR</code> to the desired installation path after the <code>dbt-setup-build-environment</code> command described below, but before the <code>dbt-build.sh</code> command. </p>
+<p>Now, do the following:</p>
+<pre><code class="language-sh">dbt-setup-build-environment  # Only needs to be done once in a given shell
+dbt-build.sh --install
+</code></pre>
+<p>...and this will build <code>listrev</code> in the local <code>./build</code> subdirectory and then install it as a package either in the local <code>./install</code> subdirectory or in whatever you pointed <code>DBT_INSTALL_DIR</code> to. </p>
+<h3 id="working-with-more-repos">Working with more repos</h3>
+<p>To work with more repos, add them to the <code>./sourcecode</code> subdirectory as we did with listrev. Be aware, though: if you're developing a new repo which itself depends on another new repo, <code>daq-buildtools</code> may not already know about this dependency. "New" in this context means "not found on https://github.com/DUNE-DAQ as of ~Jan-20-2020". If this is the case, you have one of two options:</p>
+<ul>
+<li>(Recommended) Add the names of your new packages to the <code>build_order</code> list found in <code>./sourcecode/dbt-build-order.cmake</code>, placing them in the list in the relative order in which you want them to be built. </li>
+<li>First clone, build and install your new base repo, and THEN clone, build and install your other new repo which depends on your new base repo. </li>
+</ul>
+<p><code>dbt-build.sh</code> will by default skip CMake's config+generate stages and go straight to the build stage <em>unless</em> either the <code>CMakeCache.txt</code> file isn't found in <code>./build</code> or you've just added a new repo to <code>./sourcecode</code>. If you want to remove all the contents of <code>./build</code> and run config+generate+build, all you need to do is add the <code>--clean</code> option, i.e.</p>
+<pre><code>dbt-build.sh --clean --install
+</code></pre>
+<p>And if, after the build, you want to run the unit tests, just add the <code>--unittest</code> option. Note that it can be used with or without <code>--clean</code>, so, e.g.:</p>
+<pre><code>dbt-build.sh --clean --install --unittest  # Blow away the contents of ./build, run config+generate+build, and then run the unit tests
+</code></pre>
+<p>..where in the above case, you blow away the contents of <code>./build</code>,  run config+generate+build, install the result in <code>./install</code> and then run the unit tests. Be aware that for many packages, unit tests will only (fully) work if you've also set up their runtime environment; how to do this is described below in the "Running" section of this document. </p>
+<p>To check for deviations from the coding rules described in the <a href="https://github.com/DUNE-DAQ/styleguide/blob/develop/dune-daq-cppguide.md">DUNE C++ Style Guide</a>, run with the <code>--lint</code> option:</p>
+<pre><code>dbt-build.sh --lint
+</code></pre>
+<p>...though be aware that some guideline violations (e.g., having a function which tries to do unrelated things) can't be picked up by the automated linter. </p>
+<p>Note that unlike the other options to <code>dbt-build.sh</code>, <code>--lint</code> and <code>--unittest</code> are both capable of taking an optional argument, which is the name of a specific repo in your work area which you'd like to either lint or run unit tests for. This can be useful if you're focusing on developing one of several repos in your work area. E.g., <code>dbt-build.sh --lint &lt;repo you're working on&gt;</code>.</p>
+<p>If you want to see verbose output from the compiler, all you need to do is add the <code>--verbose</code> option:</p>
+<pre><code>dbt-build.sh --verbose 
+</code></pre>
+<p>You can see all the options listed if you run the script with the <code>--help</code> command, i.e.</p>
+<pre><code>dbt-build.sh --help
+</code></pre>
+<p>Finally, note that both the output of your builds and your unit tests are logged to files in the <code>./log</code> subdirectory. These files may have ASCII color codes which make them difficult to read with some tools; <code>more</code> or <code>cat</code>, however, will display the colors and not the codes themselves. </p>
+</details>
+<h2 id="running">Running</h2>
+<p>In order to run the applications built during the above procedure, the system needs to be instructed on where to look for the libraries that can be used to instantiate objects. This is handled by the <code>dbt-setup-runtime-environment</code> script which was placed in <code>MyTopDir</code> when you ran dbt-create.sh; all you need to do is the following:</p>
+<pre><code>dbt-setup-runtime-environment
+</code></pre>
+<p>Note that if you add a new repo to your development area, after building your new code you'll need to run the script again. </p>
+<p>Once the runtime environment is set, just run the application you need. listrev, however, has no applications; it's just a DAQ module plugin which get added to <code>CET_PLUGIN_PATH</code>.  </p>
+<p>We're now going to go through a demo in which we'll use a DAQ module from listrev called <code>RandomDataListGenerator</code> to generate vectors of random numbers and then reverse them with listrev's ListReverser module.  </p>
+<p>One of the packages that's part of the standard DUNE DAQ package suite which gets set up when you run <code>dbt-setup-build-environment</code> is cmdlib. This package comes with a basic implementation that is capable of sending available command objects from a pre-loaded file, by typing their command IDs to standard input. This command facility is useful for local, test oriented use-cases. In the same runtime area, launch the application like this:</p>
+<pre><code>daq_application -c stdin://sourcecode/listrev/test/list-reversal-app.json
+</code></pre>
+<p>and (keeping in mind that you'll want to scroll the contents below horizontally to see the full output) you'll see something like</p>
+<pre><code>2020-Dec-18 14:44:44,621 INFO [stdinCommandFacility::stdinCommandFacility(...) at /scratch/workdir2/sourcecode/cmdlib/plugins/stdinCommandFacility.cpp:40] Loading commands from file: sourcecode/listrev/test/list-reversal-app.json
+2020-Dec-18 14:44:44,626 INFO [stdinCommandFacility::run(...) at /scratch/workdir2/sourcecode/cmdlib/plugins/stdinCommandFacility.cpp:63] Entered commands will be launched on CommandedObject...
+2020-Dec-18 14:44:44,626 INFO [stdinCommandFacility::run(...) at /scratch/workdir2/sourcecode/cmdlib/plugins/stdinCommandFacility.cpp:66] Available commands: | init | conf | start | stop
+</code></pre>
+<p>What you want to do first is type <code>init</code>. Next, type <code>conf</code> to execute the configuration, and then <code>start</code> to begin the actual process of moving vectors between the two modules. You should see output like the following:</p>
+<pre><code class="language-log">2020-Dec-18 14:46:39,574 DEBUG_0 [dunedaq::listrev::RandomDataListGenerator::do_work(...) at /home/jcfree/daqbuild_ipm_develop/sourcecode/listrev/plugins/RandomDataListGenerator.cpp:143] Generated list #8 with contents {168, 394, 457, 12, 43} and size 5.  DAQModule: rdlg
+2020-Dec-18 14:46:39,574 DEBUG_0 [dunedaq::listrev::ListReverser::do_work(...) at /home/jcfree/daqbuild_ipm_develop/sourcecode/listrev/plugins/ListReverser.cpp:135] Reversed list #8, new contents {43, 12, 457, 394, 168} and size 5.  DAQModule: lr
+2020-Dec-18 14:46:39,575 DEBUG_0 [dunedaq::listrev::ReversedListValidator::do_work(...) at /home/jcfree/daqbuild_ipm_develop/sourcecode/listrev/plugins/ReversedListValidator.cpp:160] Validating list #8, original contents {168, 394, 457, 12, 43} and reversed contents {43, 12, 457, 394, 168}.  DAQModule: rlv
+</code></pre>
+<p>To stop this, type the <code>stop</code> command. Ctrl-c will exit you out. </p>
+<p>For a more realistic use-case where you can send commands to the application from other services and applications, the <a href="https://github.com/DUNE-DAQ/restcmd">restcmd</a> package provides a command handling implementation through HTTP. To use this plugin, we call <code>daq_application</code> in the following manner:</p>
+<pre><code class="language-sh">daq_application --commandFacility rest://localhost:12345
+</code></pre>
+<p>To control it, let's open up a second terminal, set up the daq-buildtools' dbt-setup-env.sh script as you did in the first terminal, and start sending <code>daq_application</code> commands:</p>
+<pre><code class="language-sh">cd MyTopDir
+dbt-setup-runtime-environment
+send-restcmd.py --interactive --file ./sourcecode/listrev/test/list-reversal-app.json
+</code></pre>
+<p>You'll now see</p>
+<pre><code class="language-txt">Target url: http://localhost:12345/command
+This is a list of commands.
+Interactive mode. Type the ID of the next command to send, or type 'end' to finish.
+
+Available commands: [u'init', u'conf', u'start', u'stop']
+Press enter a command to send next: 
+</code></pre>
+<p>And you can again type <code>init</code>, etc. <em>but</em> enclosed in quotes this time. Also unlike previously, now you'll want to look in the other terminal running <code>daq_application</code> to see it responding to the commands. As before, Ctrl-c will exit you out of these applications. </p>
+<details><summary>`daq_application` Command Line Arguments</summary>
+
+Use `daq_application --help` to see all of the possible options:
+
+<pre><code class="language-sh">bash$ daq_application --help
+daq_application known arguments (additional arguments will be stored and passed on):
+  -c [ --commandFacility ] arg CommandFacility URI
+  -h [ --help ]                produce help message
+</code></pre>
+
+
+</details>
+
+<details><summary>Some additional information</summary>
+
+### TRACE Messages
+
+To enable the sending of TRACE messages to a memory buffer, you can set one of several TRACE environmental variables _before_ running `appfwk/apps/simple_test_app`.  One example is to use a command like `export TRACE_NAME=TRACE`.  (For more details, please see the [TRACE package documentation](https://cdcvs.fnal.gov/redmine/projects/trace/wiki/Wiki). For example, the [Circular Memory Buffer](https://cdcvs.fnal.gov/redmine/projects/trace/wiki/Circular_Memory_Buffer) section in the TRACE Quick Start talks about the env vars that you can use to enable tracing.)
+
+To view the TRACE messages in the memory buffer, you can use the following additional steps:
+
+* [if not done already] `export SPACK_ROOT=<your spack root> ; source $SPACK_ROOT/setup-env.sh`
+* [if not done already] `spack load trace`
+* `trace_cntl show` or `trace_cntl show | trace_delta -ct 1` (The latter displays the timestamps in human-readable format.  Note that the messages are listed in reverse chronological order in both cases.)
+
+</details>
+
+<h2 id="next-step">Next Step</h2>
+<ul>
+<li>[[Creating a new package under v2.2.0|Creating a new package under v2.2.0]]</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../creating_a_new_package/" class="btn btn-neutral float-right" title="Creating A New Package">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+        <span style="margin-left: 15px"><a href="../creating_a_new_package/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

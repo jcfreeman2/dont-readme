@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Creating A New Package - My Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Creating A New Package";
+    var mkdocs_page_input_path = "creating_a_new_package.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> My Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../index.md">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../compiling_and_running/">Compiling and Running</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Creating A New Package</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-a-development-area">Setting up a development area</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#a-packages-subdirectory-structure">A package's subdirectory structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#coding-rules">Coding rules</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#your-projects-cmakeliststxt-file">Your project's CMakeLists.txt file</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#in-depth-documentation-of-the-dune-daq-cmake-functions">In-depth documentation of the DUNE DAQ CMake functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#if-your-package-relies-on-nonstandard-dependencies">If your package relies on nonstandard dependencies</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installing-your-project-as-a-local-package">Installing your project as a local package</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">My Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Creating A New Package</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="creating-a-new-package">Creating a new package</h1>
+<h2 id="setting-up-a-development-area">Setting up a development area</h2>
+<p>To create a new package, you'll want to install a DUNE-DAQ development environment and then create a new CMake project for the package. How to install and build the DUNE-DAQ development environment is described [[here|Compiling-and-running-under-v2.2.0]].</p>
+<h2 id="a-packages-subdirectory-structure">A package's subdirectory structure</h2>
+<p>To learn a bit more about how to structure your package so that it can be incorporated into the DUNE DAQ software suite, we'll play with a contrived package called "toylibrary". It's actually contained within a subdirectory of the daq-cmake repo; however, in order to be able to build toylibrary we'll want to copy it into the <code>./sourcecode</code> directory so the build system can work with it. Assuming you're already in the base directory, do the following: </p>
+<pre><code>git clone https://github.com/DUNE-DAQ/daq-cmake.git -b dunedaq-v2.2.0
+mv daq-cmake/toylibrary sourcecode
+rm -rf daq-cmake
+</code></pre>
+<p>You can now build it using the normal commands:</p>
+<pre><code>dbt-setup-build-environment  # Assumption is you've already sourced daq-buildtools' dbt-setup-env.sh 
+dbt-build.sh --install
+</code></pre>
+<p>In terms of its actual functionality, it's pretty useless (it contains a class which can wrap an integer, and another class which can print that wrapped integer). However, its functionality is beside the point; toylibrary contains many features which DUNE DAQ packages have in common, in particular DUNE DAQ packages which provide a library other developers want to link against. For starters, take a look at the subdirectories, <code>ls sourcecode/toylibrary</code>:</p>
+<ul>
+<li><em>src</em>: contains the source files meant to be built into the package's shared object library/libraries</li>
+<li><em>include</em>: contains the headers users of your package should #include</li>
+<li><em>unittest</em>: contains the <a href="https://en.wikipedia.org/wiki/Unit_testing">unit tests</a> you write to ensure that your individual classes, functions, etc. behave as expected</li>
+<li><em>test</em>: contains any applications or plugins you've written for the purpose of <a href="https://en.wikipedia.org/wiki/Integration_testing">integration testing</a> - ensuring that your software components interact as expected</li>
+</ul>
+<p>If your package contains applications intended not for testing but for the end user, you'd put the code for it in a subdirectory called <em>apps</em>. toylibrary doesn't have this type of application, but, e.g., the appfwk package does. Similarly, plugins not intended for testing but for the end user would go in <em>plugins</em>. </p>
+<h2 id="coding-rules">Coding rules</h2>
+<p>Along with having a standard directory structure, the C++ code itself in toylibrary conforms to the <a href="https://github.com/DUNE-DAQ/styleguide/blob/develop/dune-daq-cppguide.md">DUNE C++ Style Guide</a>. Here, "style" doesn't mean whitespace and formatting, but rather, a set of Modern C++ best practices designed to make your code more robust against bugs, easier to extend, easier to reuse, etc. The DUNE C++ Style Guide is derived from the Google C++ Style Guide, but is greatly simplified and has been modified to be more appropriate to the DUNE DAQ project than Google's projects. Code which is merged into a package's git develop branch should be in conformance with the guide; while it's encouraged for code on a package's unmerged feature branches to also be in conformance, this is less important. </p>
+<h2 id="your-projects-cmakeliststxt-file">Your project's CMakeLists.txt file</h2>
+<p>Every DUNE DAQ package should have one and only one CMakeLists.txt file, in the base directory of the package (not to be confused with the base directory of the overall development area). To learn a bit about what that CMakeLists.txt file should look like, let's take a look at <code>sourcecode/toylibrary/CMakeLists.txt</code>. Because CMake is widely used and extensively documented online, this documentation will primarily focus on DUNE-specific CMake functions. The full documentation of the DUNE-specific CMake functions for users can be found as comments in the body of the CMake module which contains them (see https://github.com/DUNE-DAQ/daq-cmake/blob/dunedaq-v2.2.0/cmake/DAQ.cmake. Depending on your learning style, however, you may find it easier to start learning about some of what these functions are capable of by reading on in this wiki. </p>
+<p>At the top of CMakeLists.txt: before doing anything else, we want to define the minimum version of CMake used (currently 3.12, which supports <a href="https://cliutils.gitlab.io/modern-cmake/">modern CMake style</a>) as well as the name and version of the project. Concerning the version: it may not literally be the case that the code you're working with is exactly the same as the version-in-question's release code, because you may be on a feature branch, or there may have been commits to the develop branch since the last release. </p>
+<pre><code>cmake_minimum_required(VERSION 3.12)
+project(toylibrary VERSION 1.1.0)
+</code></pre>
+<p>Next, we want to make CMake functions written specifically for DUNE DAQ development available. Near the top of the file, you'll see the following:</p>
+<pre><code>find_package(daq-cmake REQUIRED)
+</code></pre>
+<p>This is how we ensure that the CMakeLists.txt file has access to the standard DUNE DAQ CMake functions previously mentioned. When <code>find_package</code> is called here it imports daq-cmake's <code>DAQ</code> CMake module. Note that by convention all functions/macros within the module begin with <code>daq_</code>, so as to distinguish them from functions/macros from CMake modules written outside of DUNE DAQ. </p>
+<p>The next step is to call a macro from the <code>DAQ</code> module which sets up a standard DUNE CMake environment for your CMakeLists.txt file:</p>
+<pre><code>daq_setup_environment()
+</code></pre>
+<p>To get specific, daq_setup_environment() will do the following:
+* Enforce the use of standard, extension-free C++17
+* Ensure all code within the project can find the project's public headers
+* Allow our linter scripts to work with the code 
+* Have gcc use standard warnings
+* Support the use of CTest for the unit tests</p>
+<p>Next you'll see calls to CMake's <a href="https://cmake.org/cmake/help/v3.17/command/find_package.html">find_package</a> function, which makes toylibrary's dependencies available. Comments in the file explain why the dependencies are selected. </p>
+<p>Then, you'll see a call to a function called <code>daq_add_library</code>. </p>
+<pre><code>daq_add_library(IntPrinter.cpp LINK_LIBRARIES ers::ers)
+</code></pre>
+<p>What <code>daq_add_library</code> does here is create the main project library. It looks in the project's <code>./src</code> subdirectory for a file called <code>IntPrinter.cpp</code>, which it then compiles and links against the ERS library. The result is output in the build area as a shared object library named after the project itself, in a subdirectory of the same name as that of the source file it used - <code>build/toylibrary/src/libtoylibrary.so</code>. When <code>--install</code> is passed to <code>./build_daq_software.sh</code>, as it was in the instructions above, this library in turn is installed in a subdirectory of the installation area called <code>toylibrary/lib64/libtoylibrary.so</code>. </p>
+<p>The next function you see called in the CMakeLists.txt file is <code>daq_add_application</code>:</p>
+<pre><code>daq_add_application( toylibrary_test_program toylibrary_test_program.cxx TEST LINK_LIBRARIES ${Boost_PROGRAM_OPTIONS_LIBRARY} toylibrary )
+</code></pre>
+<p>which searches in the projects' <code>test/apps/</code> subdirectory for a file called <code>toylibrary_test_program.cxx</code>, builds it, and links against the project's main library which we created via the previous <code>daq_add_library</code> command as well as a Boost library used to parse program input. The output application is named after the first argument to the function, <code>toylibrary_test_program</code>; it can be found in <code>build/toylibrary/test/apps/toylibrary_test_program</code>. Since "TEST" was selected, the application won't be placed in the install area despite <code>--install</code> being used. Note that if the "TEST" argument hadn't been supplied, along with the installation occuring, the build system would have looked in a subdirectory of the project called <code>apps/</code> rather than <code>test/apps/</code> for the source file. In this sense, <code>toylibrary_test_program</code> is an example of an integration test program of interest to a project's developers but not its users. </p>
+<p>Another function currently provided by the DAQ CMake module is <code>daq_add_unit_test</code>. Examples of this function's use can be found at the bottom of the <code>sourcecode/toylibrary/CMakeLists.txt</code> file, e.g.:</p>
+<pre><code>daq_add_unit_test(ValueWrapper_test)
+</code></pre>
+<p>If you pass this function a name, e.g., <code>MyComponent_test</code>, it will create a unit test executable off of a source file called <code>sourcecode/&lt;your packagename&gt;/unittest/MyComponent_test.cxx</code>, and handle linking in the Boost unit test dependencies. You can also optionally have it link in other libraries by providing them after the <code>LINK_LIBRARIES</code> argument as in other functions; in the above example, this isn't needed because ValueWrapper is a template class which is instantiated within the unit test code itself.   </p>
+<p>At the bottom of CMakeLists.txt, you'll see the following function:</p>
+<pre><code>daq_install()
+</code></pre>
+<p>When you call it it will install the targets (executables, shared object libraries) you wish to make available to others who want to use your package in a directory called <code>&lt;your installation directory&gt;/&lt;pkgname&gt;</code> (by default that would be <code>./install/toylibrary</code>). You'll also need to add a special file to your project for this function to work; this is discussed more fully in the "Installing your project as a local package" section later in this document. </p>
+<h2 id="in-depth-documentation-of-the-dune-daq-cmake-functions">In-depth documentation of the DUNE DAQ CMake functions</h2>
+<p>...can be found in the DAQ module file itself, in the comments above each function: https://github.com/DUNE-DAQ/daq-cmake/blob/dunedaq-v2.2.0/cmake/DAQ.cmake </p>
+<h2 id="if-your-package-relies-on-nonstandard-dependencies">If your package relies on nonstandard dependencies</h2>
+<p>...go back and take a look at the "Adding extra UPS products and product pools" section of [[Compiling-and-running-under-v2.2.0|Compiling-and-running-under-v2.2.0]]</p>
+<h2 id="installing-your-project-as-a-local-package">Installing your project as a local package</h2>
+<p>Use the procedure described below in order to have your package installed. Once your package is installed, it means other packages can access the libraries, public headers, etc., provided by your package via CMake's <code>find_package</code> command, i.e.:</p>
+<pre><code># If other users call this, they can use your code
+find_package(mypackage)
+</code></pre>
+<p>For starters, you'll want to call the DAQ module's <code>daq_install()</code> function at the bottom of your CMakeLists.txt file, as described earlier in this document. </p>
+<p>A major thing you should be aware of is that when you call CMake's <code>find_package</code> function, it will look for a file with the name <code>mypackageConfig.cmake</code> in a predetermined set of directories, including the one you defined (or allowed to default to <code>./install</code>) when you initially set up your development area as described elsewhere in the documentation. What a standard <code>mypackageConfig.cmake</code> file should look like with modern CMake is documented in many places on the web, but in order to make life as easy as possible there's a templatized version of this file in the daq-cmake package. Assuming you've got a <code>./sourcecode/mypackage</code> repo in your development area, you can do the following:</p>
+<pre><code>cd ./sourcecode/mypackage
+mkdir cmake
+cd cmake
+curl -O https://raw.githubusercontent.com/DUNE-DAQ/daq-cmake/dunedaq-v2.2.0/configs/Config.cmake.in
+mv Config.cmake.in mypackageConfig.cmake.in
+</code></pre>
+<p>and then let's look at the opening lines of <code>mypackageConfig.cmake.in</code>:</p>
+<pre><code>
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# Insert find_dependency() calls for your package's dependencies in                                                        
+# the place of this comment. Make sure they match up with the                                                              
+# find_package calls in your package's CMakeLists.txt file                                                                 
+</code></pre>
+<p>The only part of this file you need to worry about is the "Insert find_dependency()..." comment. In place of this comment, you'll want to call CMake's <code>find_dependency</code> function (details <a href="https://cmake.org/cmake/help/latest/module/CMakeFindDependencyMacro.html">here</a>) for each package that mypackage depends on; this ensures that developers who call <code>find_package(mypackage)</code> don't need to have explicit <code>find_package</code> calls on these dependencies.</p>
+<p>You can see a simple example of this kind of file with <code>./sourcecode/toylibrary/cmake/toylibraryConfig.cmake.in</code>.</p>
+<p>Once you've edited this file as described, from the base of your development area you can then run </p>
+<pre><code>dbt-build.sh --install 
+</code></pre>
+<p>without receiving an error message informing you that installation isn't an option. </p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../compiling_and_running/" class="btn btn-neutral" title="Compiling and Running"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../compiling_and_running/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
