@@ -1,0 +1,5 @@
+site_name: My Docs
+nav:
+    - Home: index.md
+    - Compiling and Running: compiling_and_running.md
+    - Creating A New Package: creating_a_new_package.md
