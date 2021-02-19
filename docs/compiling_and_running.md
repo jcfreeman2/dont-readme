@@ -230,4 +230,4 @@ To view the TRACE messages in the memory buffer, you can use the following addit
 
 ## Next Step
 
-* [[Creating a new package under v2.2.0|Creating a new package under v2.2.0]]
+* [Creating a new package under v2.2.0](creating_a_new_package.md)
