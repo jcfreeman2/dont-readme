@@ -1,5 +1,5 @@
 
-# Getting started
+# Compiling and Running
 
 ## System requirements
 
@@ -222,8 +222,8 @@ To enable the sending of TRACE messages to a memory buffer, you can set one of s
 
 To view the TRACE messages in the memory buffer, you can use the following additional steps:
 
-* [if not done already] `export SPACK_ROOT=<your spack root> ; source $SPACK_ROOT/setup-env.sh`
-* [if not done already] `spack load trace`
+* (if not done already) `export SPACK_ROOT=<your spack root> ; source $SPACK_ROOT/setup-env.sh`
+* (if not done already) `spack load trace`
 * `trace_cntl show` or `trace_cntl show | trace_delta -ct 1` (The latter displays the timestamps in human-readable format.  Note that the messages are listed in reverse chronological order in both cases.)
 
 </details>
