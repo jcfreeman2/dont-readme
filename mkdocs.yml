@@ -1,7 +1,7 @@
 site_name: My Docs
 nav:
-    - Home: docs/README.md
-    - Compiling and Running: docs/a_subdir/compiling_and_running.md
-    - Creating A New Package: docs/a_subdir/creating_a_new_package.md
+    - Home: README.md
+    - Compiling and Running: a_subdir/compiling_and_running.md
+    - Creating A New Package: a_subdir/creating_a_new_package.md
 
 theme: readthedocs
