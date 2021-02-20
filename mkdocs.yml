@@ -4,4 +4,4 @@ nav:
     - Compiling and Running: compiling_and_running.md
     - Creating A New Package: creating_a_new_package.md
 
-theme: readthedocs
+theme: default
