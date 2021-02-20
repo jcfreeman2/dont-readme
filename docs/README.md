@@ -15,3 +15,5 @@ Very much under construction.
     docs/
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
+
+A [link to the compiling-and-running instructions](a_subdir/compiling_and_running.md)
