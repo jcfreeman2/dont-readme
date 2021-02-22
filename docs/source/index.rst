@@ -11,8 +11,6 @@ Welcome to dunedaq_sphinx_md_and_readthedocs's documentation!
    :caption: Contents:
 
    README 
-   compiling_and_running
-   creating_a_new_package
 
 Indices and tables
 ==================

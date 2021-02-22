@@ -2,7 +2,7 @@
 
 Here I talk about what this project is good for and how to use it
 
-[Here I link to another page in the project](compiling_and_running.md)
+A [link to the compiling and running instructions](compiling_and_running.md)
 
 And here's how you would build a project's documentation in Sphinx (hat tip to [Sphinx documentation on the ReadTheDocs website](https://docs.readthedocs.io/en/stable/intro/getting-started-with-sphinx.html):
 
