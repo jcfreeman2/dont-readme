@@ -1,5 +1,18 @@
 site_name: DUNE DAQ Software Documentation Home
 nav:
+    - daq-buildtools/README: packages/daq-buildtools/README.md
+    - daq-buildtools/Compiling-and-running: packages/daq-buildtools/Compiling-and-running.md
+    - ipm: packages/ipm/README.md
+    - trigemu: packages/trigemu/README.md
+    - dfmodules: packages/dfmodules/README.md
+    - listrev: packages/listrev/README.md
+    - readout: packages/readout/README.md
+    - restcmd: packages/restcmd/README.md
+    - cmdlib: packages/cmdlib/README.md
+    - daq-cmake/SchemaAndCodeGen: packages/daq-cmake/SchemaAndCodeGen.md
+    - daq-cmake/README: packages/daq-cmake/README.md
+    - daq-cmake/CmakeFunctions: packages/daq-cmake/CmakeFunctions.md
+    - appfwk: packages/appfwk/README.md
     - Home: README.md
 
 theme: mkdocs
