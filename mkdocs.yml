@@ -2,23 +2,31 @@ site_name: DUNE DAQ Software Documentation Home
 nav:
     - Home: README.md
     - Packages:
-       - daq-buildtools:
-          - README: packages/daq-buildtools/README.md
-          - Compiling-and-running: packages/daq-buildtools/Compiling-and-running.md
-       - ipm: packages/ipm/README.md
        - trigemu: packages/trigemu/README.md
+       - serialization: packages/serialization/README.md
+       - restcmd: packages/restcmd/README.md
+       - readout: packages/readout/README.md
+       - opmonlib: packages/opmonlib/README.md
+       - nwqueueadapters: packages/nwqueueadapters/README.md
        - minidaqapp: packages/minidaqapp/README.md
+       - logging: packages/logging/README.md
+       - listrev: packages/listrev/README.md
+       - ipm: packages/ipm/README.md
+       - ers: packages/ers/README.md
        - dfmodules: packages/dfmodules/README.md
        - dfmessages: packages/dfmessages/README.md
        - dataformats: packages/dataformats/README.md
-       - listrev: packages/listrev/README.md
-       - readout: packages/readout/README.md
-       - restcmd: packages/restcmd/README.md
-       - cmdlib: packages/cmdlib/README.md
+       - daqdemos: packages/daqdemos/README.md
        - daq-cmake:
           - SchemaAndCodeGen: packages/daq-cmake/SchemaAndCodeGen.md
           - README: packages/daq-cmake/README.md
           - CmakeFunctions: packages/daq-cmake/CmakeFunctions.md
+       - daq-buildtools:
+          - README: packages/daq-buildtools/README.md
+          - Compiling-and-running: packages/daq-buildtools/Compiling-and-running.md
+       - cmdlib: packages/cmdlib/README.md
        - appfwk: packages/appfwk/README.md
+       - cmdlib: packages/cmdlib/README.md packages/cmdlib/README.md
+       - appfwk: packages/appfwk/README.md packages/appfwk/README.md
 
 theme: mkdocs
