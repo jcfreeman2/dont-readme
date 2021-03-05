@@ -1,15 +1,23 @@
 # Introduction
 
 The MiniDAQApp v1 demonstrates the following, within a single application using the DUNE DAQ application framework:
+
 * creation and distribution of trigger decisions to frontend readout modules
+
 * creation of data fragments in response to trigger decisions (from fake FELIX TPC data)
+
 * building of events from multiple data fragments
+
 * writing of events to disk in HDF5 format
 
 Some of the many things that are not included in this version of the application are:
+
 * readout of a real FELIX card
+
 * any interprocess communication
+
 * much error handling
+
 * interface with data selection system
 
 # Modules and queues

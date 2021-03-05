@@ -1,21 +1,26 @@
 ## Tests required for dunedaq-v2.4.0
 ### Minidaqapp
+
 * Generate a configuration using the python module minidaqapp.fake_app_confgen (default params) and test the following:
 1. Application runs through all states and supports also stop/start scrap/conf;
 1. The tests of dunedaq-v2.2.0 pass successfully.
+
 
 * Generate a configuration using python module minidaqapp/daq_app_confgen (_it's for now in branch gym/flxconfig and needs updating!_) and test the following:
 1. Application runs through all states and supports also stop/start scrap/conf;
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
 ### Minidaqapp++
+
 * Generate a configuration for 2 applications (trigger emulator + rest of minidaqapp), still with fake data generation, and test the following:
 1. Application runs through all states and supports also stop/start scrap/conf;
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
+
 * Generate a configuration for 2 applications (trigger emulator + rest of minidaqapp) with real FLX and test the following:
 1. Application runs through all states and supports also stop/start scrap/conf;
 1. The tests of dunedaq-v2.2.0 pass successfully.
+
 
 * Generate a configuration using python module timing.app_confgen (_doesn't exist yet!_) and test all commands
 
@@ -30,43 +35,59 @@
 
 ## Tests required for dunedaq-v2.3.0
 
+
 * Generate a configuration using the python listrev.app_confgen module using default settings and changing command line options. :heavy_check_mark:(Florian)
+
 * Start the daq_application and run it through all commands using the stdin command facility. :heavy_check_mark:(Florian)
+
 * Start the daq_application and run it through all commands using the rest command facility. :heavy_check_mark:(Florian)
+
 * Send invalid commands (wrong names and correct commands but in the wrong state) and check that the application behaves as expected. ❗  
-   * *Bug reported by Florian (March 3rd):* if the command "hello" is sent before "init" the application complains (as expected the first command must be init) but then remains busy and doesn't accept any other command anymore. 
-   * 🐰 Fixed in appfwk -> glm/155_bug_fix: since this bug does not affect normal working, a new tag will be applied for dunedaq-v2.4.0.
+    * *Bug reported by Florian (March 3rd):* if the command "hello" is sent before "init" the application complains (as expected the first command must be init) but then remains busy and doesn't accept any other command anymore. 
+    * 🐰 Fixed in appfwk -> glm/155_bug_fix: since this bug does not affect normal working, a new tag will be applied for dunedaq-v2.4.0.
+
 * Change DUNEDAQ_ERS debug levels and DUNEDAQ_OPMON variables and validate the applications behaviour.:heavy_check_mark:(Florian)
 
 ## Tests required for first version of MiniDAQApp (dunedaq-v2.2.0)
 
+
 * Configure the TriggerDecisionEmulator to generate TriggerDecisions that have request windows that are far off the actual time being processed by the Readout components and verify that the system gracefully reports that data is missing in the output to disk.  (Phil will do this.)
 
+
 * requests in the future
-   * test by Kurt:  I modified the `"trigger_delay_ticks" : std.floor( 12* CLOCK_SPEED_HZ/DATA_RATE_SLOWDOWN_FACTOR),` line in the TriggerDecisionEmulator part of the minidaq-app-fake-readout.jsonnet/json file (`12*` instead of `2*`) and ran with the _readout_ code on its _develop_ branch.  That produced empty Fragments.  I then updated the _readout_ code to its _roland-sipos/requeue-oob-request_ branch and tried to run.  In both of two tests, the system crashed on the second event because there were Fragments with duplicate link numbers in the second TriggerRecord.  I'm not sure if my test conditions were reasonable; I was trying to put the request window 12 seconds in the future.
+    * test by Kurt:  I modified the `"trigger_delay_ticks" : std.floor( 12* CLOCK_SPEED_HZ/DATA_RATE_SLOWDOWN_FACTOR),` line in the TriggerDecisionEmulator part of the minidaq-app-fake-readout.jsonnet/json file (`12*` instead of `2*`) and ran with the _readout_ code on its _develop_ branch.  That produced empty Fragments.  I then updated the _readout_ code to its _roland-sipos/requeue-oob-request_ branch and tried to run.  In both of two tests, the system crashed on the second event because there were Fragments with duplicate link numbers in the second TriggerRecord.  I'm not sure if my test conditions were reasonable; I was trying to put the request window 12 seconds in the future.
+
 
 * Increase progressively number of links and check how many can be handled. First tests on `epdtdifogkv04` at CERN indicate that with 10 links, we're able to keep up with the full 2 MHz data rate (Done by Giovanna) :heavy_check_mark:
+
 
 * With the maximum number of links that can be handled in input, progressively increase the trigger rate and try to reach the disc throughput limit. (Done by Eric) ✔️ 
   * I was able to run a test with 10 links, slowdown factor of 2, trigger rate of 8 Hz and window scale of 800x. This resulted in a steady state of trigger inhibits and ~650 MB/s to disk. Based on a rough calculation from the DataWriter "Processing trigger number" message, I was actually getting about 2 Hz.
 
+
 * Include a varied number of links into the trigger decision. (Done by Giovanna) :heavy_check_mark:
 
+
 * Have variable readout windows for different trigger decision  (Done by Kurt)  :heavy_check_mark:
-   * I set the min/max_readout_window_ticks in the configuration file to 900 and 1500.  I ran with 5 links at 1 Hz for ~30 seconds.  I saw the readout width reported in the FragmentHeader vary between 900 (0x384) and 1500 (0x5dc).  The Fragment sizes were quantized at 22344 and 27912 bytes, with approximately 50% of them having the smaller value and 50% having the larger value (presumably for readout windows between 900 and 1199 ticks and between 1200 and 1499 ticks, respectively).  The readout width and corresponding Fragment size was variable among the five fragments in each TriggerRecord, as expected.
+    * I set the min/max_readout_window_ticks in the configuration file to 900 and 1500.  I ran with 5 links at 1 Hz for ~30 seconds.  I saw the readout width reported in the FragmentHeader vary between 900 (0x384) and 1500 (0x5dc).  The Fragment sizes were quantized at 22344 and 27912 bytes, with approximately 50% of them having the smaller value and 50% having the larger value (presumably for readout windows between 900 and 1199 ticks and between 1200 and 1499 ticks, respectively).  The readout width and corresponding Fragment size was variable among the five fragments in each TriggerRecord, as expected.
+
 
 * Make overlapping trigger requests and check that the readout code produces the correct output. We'll start this by just duplicating trigger decisions, so they're totally overlapping (but with the trigger number different)  (Done by Kurt; see results below) :heavy_check_mark:
 
+
 * Check that Inhibits are generated when the disk rate can't support the data rate :heavy_check_mark:
-   * As a simple test of this, I (Kurt) added a temporary 1.5 second sleep to the DataWriter code (this sleep happened every time a TriggerRecord was written).  With a 2-link system with a slowdown factor on 10, running on lxplus, I saw the expected initial rate of ~1.0 Hz for the first 10 events, and then inhibits started.  For the rest of the run, the overall rate was limited to ~0.67 Hz, as we would expect.  (Recall that the current threshold for generating an Inhibit is 5 TriggerRecords being processed by the Dataflow and Readout subsystems.)
-   * See also results from test above, where due to a disk write rate limit of 650 MB/s, inhibits were used to downscale an 8 Hz requested trigger rate to ~2 Hz
+    * As a simple test of this, I (Kurt) added a temporary 1.5 second sleep to the DataWriter code (this sleep happened every time a TriggerRecord was written).  With a 2-link system with a slowdown factor on 10, running on lxplus, I saw the expected initial rate of ~1.0 Hz for the first 10 events, and then inhibits started.  For the rest of the run, the overall rate was limited to ~0.67 Hz, as we would expect.  (Recall that the current threshold for generating an Inhibit is 5 TriggerRecords being processed by the Dataflow and Readout subsystems.)
+    * See also results from test above, where due to a disk write rate limit of 650 MB/s, inhibits were used to downscale an 8 Hz requested trigger rate to ~2 Hz
+
 
 * Verify that the size of the Fragments are what is expected, given the requested readout window.
   * Modulo the notes below, the large trigger window test had a trigger window width of 960,000 ticks and Fragment size of 17,823,240 bytes, which is the expected size from the trigger window plus 5568 bytes for 12 extra WIB frames
 
 ## Tests to wait until after the first version of the MiniDAQApp
 
+
 * Be able to send `stop` command and then `start` command to the same job. This will have to wait until we understand how to correctly stop and flush the queues
+
 
 * Be able to send `scrap` command and then `conf` to the same job. The full sequence of commands would be `init -> conf -> start -> stop -> scrap -> conf -> start -> stop` so unfortunately this also depends on the stop/start test above
 

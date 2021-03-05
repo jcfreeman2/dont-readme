@@ -135,6 +135,7 @@ The so-created configuration can be tested following the instructions from the [
   >>> print(qs.pod())
   {'kind': 'FollyMPMCQueue', 'inst': 'time_sync_q', 'capacity': 100}
   ```
+
 * Trying to assign a value of the wrong kind to a field will result in an error, at construction
   ```python
   >>> qs = cmd.QueueSpec(inst="time_sync_q", kind='FollyMPMCQueue', capacity="aaa")

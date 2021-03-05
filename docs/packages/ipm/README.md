@@ -16,9 +16,13 @@ IPM provides two communication patterns:
 
 Users should interact with IPM via the interfaces `dunedaq::ipm::Sender`, `dunedaq::ipm::Receiver` and `dunedaq::ipm::Subscriber`, which are created using the factory functions `dunedaq::ipm::makeIPM(Sender|Receiver|Subscriber)`, which each take a string argument giving the implementation type. The currently-available implementation types all use ZeroMQ, and are:
 
+
 * `ZmqSender` implementing `dunedaq::ipm::Sender` in the sender/receiver pattern
+
 * `ZmqReceiver` implementing `dunedaq::ipm::Receiver`
+
 * `ZmqPublisher` implementing `dunedaq::ipm::Sender` in the publisher/subscriber pattern
+
 * `ZmqSubscriber` implementing `dunedaq::ipm::Subscriber`
 
 Basic example of the sender/receiver pattern:

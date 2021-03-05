@@ -102,7 +102,9 @@ dbt-build.sh --install
 
 To work with more repos, add them to the `./sourcecode` subdirectory as we did with appfwk. Be aware, though: if you're developing a new repo which itself depends on another new repo, `daq-buildtools` may not already know about this dependency. "New" in this context means "not found on https://github.com/DUNE-DAQ as of Oct-15-2020". If this is the case, you have one of two options:
 
+
 * (Recommended) Add the names of your new packages to the `build_order` list found near the bottom of `./sourcecode/CMakeLists.txt`, placing them in the list in the relative order in which you want them to be built. 
+
 * First clone, build and install your new base repo, and THEN clone, build and install your other new repo which depends on your new base repo. 
 
 `dbt-build.sh` will by default skip CMake's config+generate stages and go straight to the build stage _unless_ either the `CMakeCache.txt` file isn't found in `./build` or you've just added a new repo to `./sourcecode`. If you want to remove all the contents of `./build` and run config+generate+build, all you need to do is add the `--clean` option, i.e.

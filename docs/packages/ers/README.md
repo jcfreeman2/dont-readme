@@ -50,10 +50,10 @@ where N must be an integer number.
 
  * For N > 0 the issue attributes names and values are reported in addition to 0-level data
  * For N > 1 the following information is added to the issue:
-     * host name
-     * user name
-     * process id
-     * process current working directory
+        * host name
+        * user name
+        * process id
+        * process current working directory
  * For N > 2 a stack trace is added to each issue if the code was compiled without **ERS_NO_DEBUG** macro.
 
 ## Using Custom Issue Classes
@@ -85,6 +85,7 @@ ers,                                                              // namespace
 
 Note that attribute names may appear in the message expression. Also note a special
 syntax of the attributes declaration, which must always be declared using a list of 
+
 **((attribute_type)attribute_name)** tokens.
 All the brackets in this expression are essential. Do not use commas to separate attributes.
 The only requirement for the type of an issue attribute is that for this type must be defined the output
@@ -338,10 +339,12 @@ ers::FilterStream::write( const ers::Issue & issue )
 An implementation of the **ers::OutputStream::write** function must decide whether to pass the given
 issue to the next stream in the chain or not. If a custom stream does not provide any filtering
 functionality then it shall always pass the input message to the next stream by using the
+
 **chained().write( issue )** code.
 
 ### Registering a Custom Stream
 In order to register and use a custom ERS stream implementation one can use a dedicated macro called
+
 **ERS_REGISTER_STREAM** in the following way:
 
 ~~~
@@ -350,6 +353,7 @@ ERS_REGISTER_OUTPUT_STREAM( ers::FilterStream, "filter", format )
 
 The first parameter of this macro is the name of the class which implements the new stream; the second one
 gives a new stream name to be used in ERS stream configurations (this is the name which one can put to the
+
 **DUNEDAQ_ERS_<SEVERITY>** environment variables); and the last parameter is a placeholder for the stream class
 constructor parameters. If the constructor of the new custom stream does not require parameters then last
 field of this macro should be left empty.
@@ -364,6 +368,7 @@ export  DUNEDAQ_ERS_STREAM_LIBS=MyCustomFilter
 ~~~
 
 then ERS will be looking for the libMyCustomFilter.so library in all the directories which appear in the 
+
 **LD_LIBRARY_PATH** environment variable.
 
 ## Error Reporting in Multi-threaded Applications
