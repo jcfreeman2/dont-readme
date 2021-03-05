@@ -307,7 +307,9 @@ For discussion:
 
 ### Notes from MiniDAQApp meeting/discussion, Kurt's notes
 
+
 1. starting to use the “MiniDAQApp” name - no objections
+
 1. Style Guide updates.  A general proposal was to import Google recommendations on variable names.  I'm not sure if that is consistent with the specific choices that we discussed, but here are the specific choices:
    1. local variables have lower-case letters and underscores ("my_value")
    1. class data members have lower-case letters, underscores, and a trailing underscore ("my_data_member_")
@@ -322,6 +324,7 @@ For discussion:
       1. my_value(); my_value(int)
       1. get_my_value()
       1. do_something()
+
 1. Messages and data structures
     * Eric reported that he has updated variable names based on emails in recent days
     * the desired pattern is for the Fragment to have everything in contiguous memory
@@ -330,18 +333,23 @@ For discussion:
     * Component lists - we agreed that "actual" components can be determine from the data Fragments present in the TriggerRecord.  For the list of requested components that we store in the TriggerRecordHeader, it would be nice to use an old-school representation (i.e. not an std::vector) so that an extra serialization step will not be needed.
     * operator<< is desirable.  There was some discussion about whether this could/should include the raw data.  TBD.
     * there were other topics that were discussed, and Eric will incorporate those
+
 1. Repositories
     * it was proposed to rename _daq-rawdata_ to _dataformats_ **and** add the DAQ raw data format classes/structures that Eric and Phil have been working on to this repo.  So, this repo will have raw data decoders and DAQ data structures.
     * Alessandro will create a new repo named minidaqapp which we will use to store the overall application configuration (jsonnet and json).  And, if you are reading this, you realize that I will also be using this repo as a convenient place to provide notes, etc. on the overall application.
     * Adam and Alessandro will work out what the “dataflow” repo should be called.
+
 1. We looked at the configurations that we have so far for the TriggerDecisionEmulator test environment and the FakeMiniDAQApp sample environment in the _ddpdemo_ repo.
     * There was a question from Roland about what type of configuration information is available to DAQModules at the INIT transition - only information about the Queues.  Module-specific configuration should be provided in the CONF step.
+
 1. Updates from the sub-groups:
     * we had already discussed the messages and data structures...
     * Phil described the configuration parameters that are currently available in the TriggerDecisionEmulator and how those can be used to specify the different TriggerDecisions (e.g. ones with varying readout windows)
     * For the Dataflow scope, we described the skeleton application and our current work assignments:  Carlos: RequestGeneator, Marco: FragmentReceiver, Adam: DataWriter
     * I've copied the update from Roland on the Readout part below
+
 1. Updates to diagrams - I'll work on those
+
 1. Next meeting: January 5th or 6th.  The goal is to have a working meeting in which we are integrating the various parts together.  Of course, we will be starting such integration as soon as we can.
 
 ### Notes from Roland
@@ -372,5 +380,7 @@ We will have 2 source Modules per physicial FELIX card (with configurable output
 ### Notes from the DFWG meeting
 
 Phil gave a [nice presentation on our work on the MiniDAQApp](https://indico.fnal.gov/event/46960/).  A couple of suggestions came out of the ensuing discussion:
+
 1. It would be nice to have a list of the repositories that contain the various code pieces.  (To help with this, I started a list on the _minidaqapp_ repo Wiki page.)
+
 1. We should remember to run tests in which the TriggerDecision asks for data that is no longer in the Upstream DAQ buffers, to verify tha this situation is gracefully handled.  This came out of a discussion about how the different time values in the TimeSync message are used.

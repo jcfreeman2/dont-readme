@@ -8,8 +8,10 @@ To run it, please **source** it (e.g. `source <filename>`) and do this from the 
 &#x1F53A;Note:&#x1F53A; For now the configuration of OPMON is managed through environment variables: DUNEDAQ_OPMON_INTERVAL sets the interval in seconds between calling get_info (0 means disabled!), DUNEDAQ_OPMON_LEVEL allows to set the level for get_info. Note that get_info is called on the DAQ modules only in states CONFIGURED/RUNNING.
 
 
+
 1. create a new software area using the [instructions for dunedaq-v2.2.0](https://github.com/DUNE-DAQ/appfwk/wiki/Compiling-and-running-under-v2.2.0) (very roughly: `source daq-buildtools/dbt-setup-env.sh`, `cd <work_dir>`, `dbt-create.sh dunedaq-v2.2.0`  )
     * &#x1F53A;Please Note&#x1F53A; that you should update the version of your existing daq-buildtools cloned area to tag v2.1.1.
+
 1. add the following repositories to the /sourcecode area:
     * `cd sourcecode`
     * `git clone https://github.com/DUNE-DAQ/daq-cmake.git -b v1.3.1`
@@ -32,25 +34,34 @@ To run it, please **source** it (e.g. `source <filename>`) and do this from the 
     * `git clone https://github.com/DUNE-DAQ/trigemu.git -b develop`
     * `git clone https://github.com/DUNE-DAQ/minidaqapp.git -b develop`
     * `cd ..`
+
 1. Update `dbt-settings`:
     1. Uncomment `products` and `products_dev` lines
     1. Replace zmq line with `"zmq v4_3_1c e19:prof"`
     1. Add line `"cppzmq v4_3_0 e19:prof"`
     1. Add line `"msgpack_c v3_3_0 e19:prof"`
     1. Add line `"felix v1_1_0 e19:prof"`
+
 1. Update `sourcecode/dbt-build-order.cmake` to:
 ```
 set(build_order "daq-cmake" "ers" "logging" "cmdlib" "rcif" "restcmd" "opmonlib" "appfwk" "listrev" "daqdemos" "ipm" "serialization" "nwqueueadapters" "dataformats" "dfmessages" "dfmodules" "readout" "flxlibs" "trigemu" "minidaqapp")
 ```
+
 5. Update the version of `moo` in your environment
     1. `dbt-setup-build-environment`
     1. `pip uninstall moo && pip install https://github.com/brettviren/moo/archive/0.5.5.tar.gz`
         * This will prompt you to confirm that you really want to do this, so you need to reply "y"...
+
 1. `dbt-setup-build-environment`
+
 1. `dbt-build.sh --install`
+
 1. `dbt-setup-runtime-environment`
+
 1. download a raw data file ([CERNBox link](https://cernbox.cern.ch/index.php/s/VAqNtn7bwuQtff3/download)) and put it into ./ (if you put the data anywhere else you'll need to modify the json file accordingly).
+
 1. `python -m minidaqapp.fake_app_confgen -d ./frames.bin -o '.' my_minidaq_config.json`
+
 1. `daq_application --name mdapp_test -c stdin://./my_minidaq_config.json`
     * &#x1F538;Please Note&#x1F538; Triggers will not be generated until after a `resume` command is issued (no pause is necessary, so the order of commands to issue is: init, conf, start, resume)
     * &#x1F538;Please Note&#x1F538; this configuration should generate trigger records with 2 links each, at 1 Hz.
@@ -61,8 +72,10 @@ set(build_order "daq-cmake" "ers" "logging" "cmdlib" "rcif" "restcmd" "opmonlib"
 
 ### Draft instructions for setting up a v2.3.0 software area for v2.4.0 development
 
+
 1. create a new software area using the [instructions for dunedaq-v2.3.0](https://github.com/DUNE-DAQ/appfwk/wiki/Compiling-and-running-under-v2.3.0) (very roughly: `source daq-buildtools/dbt-setup-env.sh`, `cd <work_dir>`, `dbt-create.sh dunedaq-v2.3.0`  )
     * &#x1F53A;Please Note&#x1F53A; that you should update the version of your existing daq-buildtools cloned area to tag v2.2.1.
+
 1. add the following repositories to the /sourcecode area:
     * `cd sourcecode`
     * `git clone https://github.com/DUNE-DAQ/dataformats.git -b develop`
@@ -77,20 +90,27 @@ set(build_order "daq-cmake" "ers" "logging" "cmdlib" "rcif" "restcmd" "opmonlib"
     * `git clone https://github.com/DUNE-DAQ/trigemu.git -b develop`
     * `git clone https://github.com/DUNE-DAQ/minidaqapp.git -b develop`
     * `cd ..`
+
 1. Update `dbt-settings`:
     1. Uncomment lines of `#/cvmfs/dune.opensciencegrid.org/dunedaq/DUNE/products` and `#/cvmfs/dune.opensciencegrid.org/dunedaq/DUNE/products_dev`;
     1. Add line `"felix v1_1_0 e19:prof"`
+
 1. Update `sourcecode/dbt-build-order.cmake` to:
 ```
 set(build_order "daq-cmake" "ers" "logging" "cmdlib" "rcif" "restcmd" "opmonlib" "appfwk" "listrev" "daqdemos" "ipm" "serialization" "nwqueueadapters" "dataformats" "dfmessages" "dfmodules" "readout" "flxlibs" "trigemu" "minidaqapp")
 ```
+
 1. `dbt-setup-build-environment`
+
 1. `dbt-build.sh --install`
+
 1. `dbt-setup-runtime-environment`
+
 1. continue as described above...
 
 
 <!-- 
+
 
 1. If you wish to change rate in the course of a run, this is best done using the REST command interface for command distribution. To do this you should have built the restcmd package, together with the rest of the software.
     * Open 2 terminals (let's assume on the same host); 

@@ -2,35 +2,50 @@
 ### Minidaqapp
 
 * Generate a configuration using the python module minidaqapp.fake_app_confgen (default params) and test the following:
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
 
 * Generate a configuration using python module minidaqapp/daq_app_confgen (_it's for now in branch gym/flxconfig and needs updating!_) and test the following:
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
 ### Minidaqapp++
 
 * Generate a configuration for 2 applications (trigger emulator + rest of minidaqapp), still with fake data generation, and test the following:
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
 
 * Generate a configuration for 2 applications (trigger emulator + rest of minidaqapp) with real FLX and test the following:
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
 
 * Generate a configuration using python module timing.app_confgen (_doesn't exist yet!_) and test all commands
 
 ### Common to both Minidaqapp and Minidaqapp++
+
 1. The data inside the generated HDF5 files looks correct. The HDF5 utility `h5dump` can be used to inspect the contents of the raw data files, as can our custom `hdf5_dump.py` script.
+
 1. Output files are limited in size to the value specified in the max_file_size_bytes configuration parameter, and the 2nd, 3d, etc. files have the _file index_ field in the filename incremented.
+
 1. The system reliably drains all data that is "in flight" when a run stop is requested.  (This test may require some special conditions to generate a backlog of data, such as running on a slow computer and requesting a high trigger rate, or artificially extending the time that is needed to write out a TriggerRecord.)
+
 1. The token-based system of preventing TriggerDecisions from being generated when the Dataflow and Readout parts of the system are already full works reliably.  (This may also require some special conditions to generate more triggers and/or data than a given minidaqapp instance can handle.  Note that the `initial_token_count` configuration parameter controls how many TriggerDecisions are allowed to be "in flight" at any one time.)
+
 1. When an invalid directory path is specified for the output data files, an error is reported at run start time.
+
 1. A failure in the writing of a TriggerRecord to an output file does not crash the application.  (This may take some work to set up the special conditions needed to test this.)
+
 1. The disabling and prescaling of data writing works correctly.  The former is often controlled by a command-line argument to a confgen.py script (e.g `--disable-data-storage`), the latter is controlled by the `data_storage_prescale` configuration parameter.
 
 ## Tests required for dunedaq-v2.3.0

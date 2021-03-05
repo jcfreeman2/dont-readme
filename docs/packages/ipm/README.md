@@ -2,8 +2,11 @@
 Inter-Process Messaging
 
 PAR 2021-01-26: To build the HEAD of `develop`, you'll need to make the following modifications to `dbt-settings`:
+
 1. Add `/cvmfs/dune.opensciencegrid.org/dunedaq/DUNE/products`
+
 2. Change the `zmq` line to `"zmq v4_3_1c e19:prof"`
+
 3. Add the `cppzmq` product: `"cppzmq v4_3_0 e19:prof"`
 See https://github.com/DUNE-DAQ/appfwk/wiki/Compiling-and-running-under-v2.2.0#adding-extra-ups-products-and-product-pools for more about this.
 
@@ -11,7 +14,9 @@ The IPM library provides the low-level library for for sending messages between 
 
 IPM provides two communication patterns:
 
+
 1. `Sender`/`Receiver`, a pattern in which one sender talks to one receiver
+
 2. `Publisher`/`Subscriber`, a pattern in which one sender talks to zero or more receivers. Each message goes to all subscribers
 
 Users should interact with IPM via the interfaces `dunedaq::ipm::Sender`, `dunedaq::ipm::Receiver` and `dunedaq::ipm::Subscriber`, which are created using the factory functions `dunedaq::ipm::makeIPM(Sender|Receiver|Subscriber)`, which each take a string argument giving the implementation type. The currently-available implementation types all use ZeroMQ, and are:

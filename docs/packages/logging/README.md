@@ -27,11 +27,17 @@ Users will be able to use the Assertion Macros from ERS. They will also use macr
 For logging, the six ERS "streams" (fatal, error, warning, info, log and debug) will be accessed using
 the ers methods or the TRACE macros as follow:
 
+
 1. ers::fatal( ers::Issue );
+
 2. ers::error( ers::Issue );
+
 3. ers::warning( ers::Issue );
+
 4. ers::info( ers::Issue );
+
 5. TLOG_LOG()       << ers::Issue or basic string/args
+
 6. LOG_DEBUG(lvl)  << ers::Issue or basic string/args
 
 Further, version specific, information can be found at https://github.com/DUNE-DAQ/logging/wiki

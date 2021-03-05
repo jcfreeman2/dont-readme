@@ -75,16 +75,20 @@ The so-created configuration can be tested following the instructions from the [
 ```daq_application -c stdin://./my_minidaq_config.json```
 
 ### Summary of changes to minidaqapp repositories
+
 1. `appfwk`: added `StartParams` and `EmptyParams` records.
             added `appfwk.utils` utility functions.
+
 2. **FIXED** `dfmodules`: minor issue with empty string records. 
    ```
    s.field("file_index_prefix", self.fnprefix, "", doc="Prefix for the file index part of the filename"),
    ```
    Issue reported to Brett and fixed.
+
 3. `readout`: 
    - `DataLinkHandler`'s and `FakeCardReader`'s `Str` type was defined as a string matching the `string` pattern.
    - Dashes `-` converted to `_` in instance names,
+
 4. `minidaqapp`: added `fake_app_confgen` module.
 
 
