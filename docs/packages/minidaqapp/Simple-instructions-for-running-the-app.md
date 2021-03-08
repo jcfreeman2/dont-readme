@@ -1,3 +1,4 @@
+# Simple instructions for running the app
 For reference, here is a presentation by Phil Rodrigues that describe the characteristics of the first version of the MiniDAQApp:  [https://indico.fnal.gov/event/47339/](https://indico.fnal.gov/event/47339/contributions/206365/attachments/139034/174369/minidaqapp-update-2021-01-20.pdf)
 
 ### Quick-start instructions

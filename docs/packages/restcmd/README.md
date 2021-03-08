@@ -1,3 +1,4 @@
+# restcmd README
 ## restcmd - HTTP REST backend based CommandFacility
 This implementation of the CommandFacility interface from cmdlib, is providing a way to send
 commands to applications via HTTP. This is carried out by the small web-server that this plugin

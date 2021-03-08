@@ -1,3 +1,4 @@
+# MiniDAQApp Diagrams
 Here is a view of the MiniDAQApp based on the UpstreamDAQ-to-Dataflow interface diagram.  This view is intended to give a sense of which parts of the interaction between the UpstreamDAQ subsystem and the Dataflow subsystem will be covered by this app.  
 
 ![MiniDAQApp view based on the UD-DF interfaces diagram](https://user-images.githubusercontent.com/36311946/102424947-e3f2ff80-3fd1-11eb-9422-202115c89219.png)

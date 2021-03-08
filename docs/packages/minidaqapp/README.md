@@ -1,3 +1,4 @@
+# minidaqapp README
 Welcome to the minidaqapp wiki!
 
 A MiniDAQ application to read out FELIX data and store it in HDF5 files on disk.

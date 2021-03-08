@@ -1,3 +1,4 @@
+# dataformats README
 # DUNE DAQ Data Formats
 
 - This repository contains raw data bitfields and utilities used to decode them

@@ -1,3 +1,4 @@
+# Notes from meetings and discussions
 ## 25-Jan-2021, Kurt's notes from DF scope discussion for dunedaq-v2.4.0
 
 We used [these slides](https://github.com/DUNE-DAQ/minidaqapp/files/5870842/Thoughts.on.next.dunedaq.release.GLM.notes.with.DF.mods.pptx) to guide and document the discussion.  In particular, see slide 4.

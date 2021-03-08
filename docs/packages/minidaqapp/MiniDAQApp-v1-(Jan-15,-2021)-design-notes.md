@@ -1,3 +1,4 @@
+# MiniDAQApp v1 (Jan 15, 2021) design notes
 # Introduction
 
 The MiniDAQApp v1 demonstrates the following, within a single application using the DUNE DAQ application framework:
