@@ -20,12 +20,12 @@ nav:
        - listrev: packages/listrev/README.md
        - logging: packages/logging/README.md
        - minidaqapp:
+          - README: packages/minidaqapp/README.md
           - Reminders-about-tests-that-we-want-to-run: packages/minidaqapp/Reminders-about-tests-that-we-want-to-run.md
           - Coordination-notes-for-v2.3.0-and-v2.4.0: packages/minidaqapp/Coordination-notes-for-v2.3.0-and-v2.4.0.md
           - Notes-from-meetings-and-discussions: packages/minidaqapp/Notes-from-meetings-and-discussions.md
           - MiniDAQApp-Diagrams: packages/minidaqapp/MiniDAQApp-Diagrams.md
           - Simple-instructions-for-running-the-app: packages/minidaqapp/Simple-instructions-for-running-the-app.md
-          - Home: packages/minidaqapp/Home.md
           - Instructions-for-setting-up-a-v2.4.0-development-environment: packages/minidaqapp/Instructions-for-setting-up-a-v2.4.0-development-environment.md
        - nwqueueadapters: packages/nwqueueadapters/README.md
        - opmonlib: packages/opmonlib/README.md
