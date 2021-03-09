@@ -4,14 +4,18 @@
 
 * Generate a configuration using the python module minidaqapp.fake_app_confgen (default params) and test the following:
 
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
 
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
 
 * Generate a configuration using python module minidaqapp/daq_app_confgen (_it's for now in branch gym/flxconfig and needs updating!_) and test the following:
 
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
 
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
@@ -19,14 +23,18 @@
 
 * Generate a configuration for 2 applications (trigger emulator + rest of minidaqapp), still with fake data generation, and test the following:
 
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
 
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
 
 * Generate a configuration for 2 applications (trigger emulator + rest of minidaqapp) with real FLX and test the following:
 
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
 
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
@@ -35,17 +43,24 @@
 
 ### Common to both Minidaqapp and Minidaqapp++
 
+
 1. The data inside the generated HDF5 files looks correct. The HDF5 utility `h5dump` can be used to inspect the contents of the raw data files, as can our custom `hdf5_dump.py` script.
+
 
 1. Output files are limited in size to the value specified in the max_file_size_bytes configuration parameter, and the 2nd, 3d, etc. files have the _file index_ field in the filename incremented.
 
+
 1. The system reliably drains all data that is "in flight" when a run stop is requested.  (This test may require some special conditions to generate a backlog of data, such as running on a slow computer and requesting a high trigger rate, or artificially extending the time that is needed to write out a TriggerRecord.)
+
 
 1. The token-based system of preventing TriggerDecisions from being generated when the Dataflow and Readout parts of the system are already full works reliably.  (This may also require some special conditions to generate more triggers and/or data than a given minidaqapp instance can handle.  Note that the `initial_token_count` configuration parameter controls how many TriggerDecisions are allowed to be "in flight" at any one time.)
 
+
 1. When an invalid directory path is specified for the output data files, an error is reported at run start time.
 
+
 1. A failure in the writing of a TriggerRecord to an output file does not crash the application.  (This may take some work to set up the special conditions needed to test this.)
+
 
 1. The disabling and prescaling of data writing works correctly.  The former is often controlled by a command-line argument to a confgen.py script (e.g `--disable-data-storage`), the latter is controlled by the `data_storage_prescale` configuration parameter.
 
@@ -145,96 +160,96 @@ I then ran the system with the debug printout of the first 400 bytes from each F
     7 01-14 17:00:47.090741   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 80: 0x00000000 0xaaaaaaaa 0xc9093a67 0x6f898a91 0x3a905329
     8 01-14 17:00:47.090740   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 75: 0xd94357a8 0xbf7e8d37 0x918e6968 0x5fbc0000 0xc8bc6e23
     9 01-14 17:00:47.090738   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 70: 0xacfe3892 0x3e987308 0x99b37482 0x92778e37 0x8d396963
-   10 01-14 17:00:47.090737   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 65: 0x968d9969 0xa858b9e5 0xacbf9b8d 0x388e73f8 0x13699d14
-   11 01-14 17:00:47.090736   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 60: 0xb9c39c94 0xdc8f9637 0x8e376873 0x9813f791 0x34508d39
-   12 01-14 17:00:47.090734   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 55: 0xbf3a938d 0x3d9123a9 0x8389e82d 0xe4703c97 0x40a563d9
-   13 01-14 17:00:47.090733   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 50: 0x35710000 0xc8bcca1f 0x00000000 0xaaaaaaaa 0xb969063f
-   14 01-14 17:00:47.090731   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 45: 0xcf97993a 0x8a3a08f3 0x9863b7ba 0xa1368d3a 0x928f2899
-   15 01-14 17:00:47.090729   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 40: 0x3a922358 0x7309a22b 0xbe283c91 0x3e97e359 0x094361b9
-   16 01-14 17:00:47.090694   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 35: 0x38f39161 0x4a698d38 0x938a89f8 0xf829e06a 0xacff8f94
-   17 01-14 17:00:47.090692   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 30: 0xf6153d9b 0x419eb3f9 0xd993508e 0x26848b39 0x8e365903
-   18 01-14 17:00:47.090690   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 25: 0xaaaa2a2a 0xa888d65c 0xaabb898c 0x3a8c13c8 0xc328a9d1
-   19 01-14 17:00:47.090689   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 20: 0x794cee70 0x011b5c79 0x9b400000 0xc8bc201a 0x00000000
-   20 01-14 17:00:47.090687   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 15: 0x00000000 0x00000000 0x00000000 0x00042100 0x00000000
-   21 01-14 17:00:47.090686   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 10: 0x000004b0 0x00000000 0x0000014d 0x00000000 0x00000000
-   22 01-14 17:00:47.090684   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  5: 0x00000000 0x794cf340 0x011b5c79 0x000003e8 0x00000000
-   23 01-14 17:00:47.090682   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  0: 0x11112222 0x00000001 0x00006d08 0x00000000 0x00000029
-   24 01-14 17:00:47.090675   10320   10362   7               DataWriter D17 do_work: datawriter: Partial(?) contents of the Fragment from link 0
-   25 01-14 17:00:47.090455   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 41 and detector type FELIX and apa/link number 0 / 1
-   26 01-14 17:00:47.090449   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
-   27 01-14 17:00:47.090435   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 95: 0xb7fa9394 0x3f932338 0xb3e9baa3 0xd8863b97 0x419ea339
-   28 01-14 17:00:47.090433   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 90: 0x893c48f3 0xd803a299 0x64178a3c 0x898fa849 0x69493a1e
-   29 01-14 17:00:47.090416   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 85: 0x33b89beb 0xb1be3b96 0x449a1379 0xc843e8dd 0xa0fb933e
-   30 01-14 17:00:47.090414   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 80: 0x00000000 0xaaaaaaaa 0xc9093a67 0x6f898a91 0x3a905329
-   31 01-14 17:00:47.090413   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 75: 0xd94357a8 0xbf7e8d37 0x918e6968 0x5fbc0000 0xc8bc6e23
-   32 01-14 17:00:47.090411   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 70: 0xacfe3892 0x3e987308 0x99b37482 0x92778e37 0x8d396963
-   33 01-14 17:00:47.090410   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 65: 0x968d9969 0xa858b9e5 0xacbf9b8d 0x388e73f8 0x13699d14
-   34 01-14 17:00:47.090408   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 60: 0xb9c39c94 0xdc8f9637 0x8e376873 0x9813f791 0x34508d39
-   35 01-14 17:00:47.090407   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 55: 0xbf3a938d 0x3d9123a9 0x8389e82d 0xe4703c97 0x40a563d9
-   36 01-14 17:00:47.090405   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 50: 0x35710000 0xc8bcca1f 0x00000000 0xaaaaaaaa 0xb969063f
-   37 01-14 17:00:47.090404   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 45: 0xcf97993a 0x8a3a08f3 0x9863b7ba 0xa1368d3a 0x928f2899
-   38 01-14 17:00:47.090402   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 40: 0x3a922358 0x7309a22b 0xbe283c91 0x3e97e359 0x094361b9
-   39 01-14 17:00:47.090401   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 35: 0x38f39161 0x4a698d38 0x938a89f8 0xf829e06a 0xacff8f94
-   40 01-14 17:00:47.090399   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 30: 0xf6153d9b 0x419eb3f9 0xd993508e 0x26848b39 0x8e365903
-   41 01-14 17:00:47.090398   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 25: 0xaaaa2a2a 0xa888d65c 0xaabb898c 0x3a8c13c8 0xc328a9d1
-   42 01-14 17:00:47.090375   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 20: 0x794cee70 0x011b5c79 0x9b400000 0xc8bc201a 0x00000000
-   43 01-14 17:00:47.090373   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 15: 0x00000000 0x00000000 0x00000000 0x00042100 0x00000000
-   44 01-14 17:00:47.090371   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 10: 0x000004b0 0x00000000 0x0000014d 0x00000000 0x00000001
-   45 01-14 17:00:47.090369   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  5: 0x00000000 0x794cf340 0x011b5c79 0x000003e8 0x00000000
-   46 01-14 17:00:47.090366   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  0: 0x11112222 0x00000001 0x00006d08 0x00000000 0x00000029
-   47 01-14 17:00:47.090357   10320   10362   7               DataWriter D17 do_work: datawriter: Partial(?) contents of the Fragment from link 1
-   48 01-14 17:00:47.090039   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 41 and detector type TriggerRecordHeader and apa/link number 1 / 1
-   49 01-14 17:00:47.090034   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
-   50 01-14 17:00:47.089983   10320   10362   7               DataWriter D10 do_work: datawriter: Popped the TriggerRecord for trigger number 41 off the input queue
-   51 01-14 17:00:47.072362   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 42 and detector type FELIX and apa/link number 0 / 1
-   52 01-14 17:00:47.072357   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
-   53 01-14 17:00:47.072337   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 95: 0xb7fa9394 0x3f932338 0xb3e9baa3 0xd8863b97 0x419ea339
-   54 01-14 17:00:47.072335   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 90: 0x893c48f3 0xd803a299 0x64178a3c 0x898fa849 0x69493a1e
-   55 01-14 17:00:47.072319   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 85: 0x33b89beb 0xb1be3b96 0x449a1379 0xc843e8dd 0xa0fb933e
-   56 01-14 17:00:47.072318   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 80: 0x00000000 0xaaaaaaaa 0xc9093a67 0x6f898a91 0x3a905329
-   57 01-14 17:00:47.072316   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 75: 0xd94357a8 0xbf7e8d37 0x918e6968 0x5fbc0000 0xc8bc6e23
-   58 01-14 17:00:47.072315   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 70: 0xacfe3892 0x3e987308 0x99b37482 0x92778e37 0x8d396963
-   59 01-14 17:00:47.072313   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 65: 0x968d9969 0xa858b9e5 0xacbf9b8d 0x388e73f8 0x13699d14
-   60 01-14 17:00:47.072312   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 60: 0xb9c39c94 0xdc8f9637 0x8e376873 0x9813f791 0x34508d39
-   61 01-14 17:00:47.072311   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 55: 0xbf3a938d 0x3d9123a9 0x8389e82d 0xe4703c97 0x40a563d9
-   62 01-14 17:00:47.072309   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 50: 0x35710000 0xc8bcca1f 0x00000000 0xaaaaaaaa 0xb969063f
-   63 01-14 17:00:47.072308   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 45: 0xcf97993a 0x8a3a08f3 0x9863b7ba 0xa1368d3a 0x928f2899
-   64 01-14 17:00:47.072306   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 40: 0x3a922358 0x7309a22b 0xbe283c91 0x3e97e359 0x094361b9
-   65 01-14 17:00:47.072304   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 35: 0x38f39161 0x4a698d38 0x938a89f8 0xf829e06a 0xacff8f94
-   66 01-14 17:00:47.072303   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 30: 0xf6153d9b 0x419eb3f9 0xd993508e 0x26848b39 0x8e365903
-   67 01-14 17:00:47.072285   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 25: 0xaaaa2a2a 0xa888d65c 0xaabb898c 0x3a8c13c8 0xc328a9d1
-   68 01-14 17:00:47.072283   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 20: 0x794cee70 0x011b5c79 0x9b400000 0xc8bc201a 0x00000000
-   69 01-14 17:00:47.072281   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 15: 0x00000000 0x00000000 0x00000000 0x00042100 0x00000000
-   70 01-14 17:00:47.072280   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 10: 0x000004b0 0x00000000 0x0000014d 0x00000000 0x00000001
-   71 01-14 17:00:47.072278   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  5: 0x00000000 0x794cf340 0x011b5c79 0x000003e8 0x00000000
-   72 01-14 17:00:47.072275   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  0: 0x11112222 0x00000001 0x00006d08 0x00000000 0x0000002a
-   73 01-14 17:00:47.072267   10320   10362   7               DataWriter D17 do_work: datawriter: Partial(?) contents of the Fragment from link 1
-   74 01-14 17:00:47.071952   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 42 and detector type FELIX and apa/link number 0 / 0
-   75 01-14 17:00:47.071944   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
-   76 01-14 17:00:47.071925   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 95: 0xb7fa9394 0x3f932338 0xb3e9baa3 0xd8863b97 0x419ea339
-   77 01-14 17:00:47.071924   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 90: 0x893c48f3 0xd803a299 0x64178a3c 0x898fa849 0x69493a1e
-   78 01-14 17:00:47.071923   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 85: 0x33b89beb 0xb1be3b96 0x449a1379 0xc843e8dd 0xa0fb933e
-   79 01-14 17:00:47.071921   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 80: 0x00000000 0xaaaaaaaa 0xc9093a67 0x6f898a91 0x3a905329
-   80 01-14 17:00:47.071907   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 75: 0xd94357a8 0xbf7e8d37 0x918e6968 0x5fbc0000 0xc8bc6e23
-   81 01-14 17:00:47.071906   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 70: 0xacfe3892 0x3e987308 0x99b37482 0x92778e37 0x8d396963
-   82 01-14 17:00:47.071904   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 65: 0x968d9969 0xa858b9e5 0xacbf9b8d 0x388e73f8 0x13699d14
-   83 01-14 17:00:47.071903   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 60: 0xb9c39c94 0xdc8f9637 0x8e376873 0x9813f791 0x34508d39
-   84 01-14 17:00:47.071901   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 55: 0xbf3a938d 0x3d9123a9 0x8389e82d 0xe4703c97 0x40a563d9
-   85 01-14 17:00:47.071900   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 50: 0x35710000 0xc8bcca1f 0x00000000 0xaaaaaaaa 0xb969063f
-   86 01-14 17:00:47.071898   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 45: 0xcf97993a 0x8a3a08f3 0x9863b7ba 0xa1368d3a 0x928f2899
-   87 01-14 17:00:47.071897   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 40: 0x3a922358 0x7309a22b 0xbe283c91 0x3e97e359 0x094361b9
-   88 01-14 17:00:47.071895   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 35: 0x38f39161 0x4a698d38 0x938a89f8 0xf829e06a 0xacff8f94
-   89 01-14 17:00:47.071894   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 30: 0xf6153d9b 0x419eb3f9 0xd993508e 0x26848b39 0x8e365903
-   90 01-14 17:00:47.071892   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 25: 0xaaaa2a2a 0xa888d65c 0xaabb898c 0x3a8c13c8 0xc328a9d1
-   91 01-14 17:00:47.071891   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 20: 0x794cee70 0x011b5c79 0x9b400000 0xc8bc201a 0x00000000
-   92 01-14 17:00:47.071889   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 15: 0x00000000 0x00000000 0x00000000 0x00042100 0x00000000
-   93 01-14 17:00:47.071827   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 10: 0x000004b0 0x00000000 0x0000014d 0x00000000 0x00000000
-   94 01-14 17:00:47.071826   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  5: 0x00000000 0x794cf340 0x011b5c79 0x000003e8 0x00000000
-   95 01-14 17:00:47.071822   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  0: 0x11112222 0x00000001 0x00006d08 0x00000000 0x0000002a
-   96 01-14 17:00:47.071810   10320   10362   7               DataWriter D17 do_work: datawriter: Partial(?) contents of the Fragment from link 0
-   97 01-14 17:00:47.071356   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 42 and detector type TriggerRecordHeader and apa/link number 1 / 1
-   98 01-14 17:00:47.071345   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
-   99 01-14 17:00:47.071284   10320   10362   7               DataWriter D10 do_work: datawriter: Popped the TriggerRecord for trigger number 42 off the input queue
+    10 01-14 17:00:47.090737   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 65: 0x968d9969 0xa858b9e5 0xacbf9b8d 0x388e73f8 0x13699d14
+    11 01-14 17:00:47.090736   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 60: 0xb9c39c94 0xdc8f9637 0x8e376873 0x9813f791 0x34508d39
+    12 01-14 17:00:47.090734   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 55: 0xbf3a938d 0x3d9123a9 0x8389e82d 0xe4703c97 0x40a563d9
+    13 01-14 17:00:47.090733   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 50: 0x35710000 0xc8bcca1f 0x00000000 0xaaaaaaaa 0xb969063f
+    14 01-14 17:00:47.090731   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 45: 0xcf97993a 0x8a3a08f3 0x9863b7ba 0xa1368d3a 0x928f2899
+    15 01-14 17:00:47.090729   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 40: 0x3a922358 0x7309a22b 0xbe283c91 0x3e97e359 0x094361b9
+    16 01-14 17:00:47.090694   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 35: 0x38f39161 0x4a698d38 0x938a89f8 0xf829e06a 0xacff8f94
+    17 01-14 17:00:47.090692   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 30: 0xf6153d9b 0x419eb3f9 0xd993508e 0x26848b39 0x8e365903
+    18 01-14 17:00:47.090690   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 25: 0xaaaa2a2a 0xa888d65c 0xaabb898c 0x3a8c13c8 0xc328a9d1
+    19 01-14 17:00:47.090689   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 20: 0x794cee70 0x011b5c79 0x9b400000 0xc8bc201a 0x00000000
+    20 01-14 17:00:47.090687   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 15: 0x00000000 0x00000000 0x00000000 0x00042100 0x00000000
+    21 01-14 17:00:47.090686   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 10: 0x000004b0 0x00000000 0x0000014d 0x00000000 0x00000000
+    22 01-14 17:00:47.090684   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  5: 0x00000000 0x794cf340 0x011b5c79 0x000003e8 0x00000000
+    23 01-14 17:00:47.090682   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  0: 0x11112222 0x00000001 0x00006d08 0x00000000 0x00000029
+    24 01-14 17:00:47.090675   10320   10362   7               DataWriter D17 do_work: datawriter: Partial(?) contents of the Fragment from link 0
+    25 01-14 17:00:47.090455   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 41 and detector type FELIX and apa/link number 0 / 1
+    26 01-14 17:00:47.090449   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
+    27 01-14 17:00:47.090435   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 95: 0xb7fa9394 0x3f932338 0xb3e9baa3 0xd8863b97 0x419ea339
+    28 01-14 17:00:47.090433   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 90: 0x893c48f3 0xd803a299 0x64178a3c 0x898fa849 0x69493a1e
+    29 01-14 17:00:47.090416   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 85: 0x33b89beb 0xb1be3b96 0x449a1379 0xc843e8dd 0xa0fb933e
+    30 01-14 17:00:47.090414   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 80: 0x00000000 0xaaaaaaaa 0xc9093a67 0x6f898a91 0x3a905329
+    31 01-14 17:00:47.090413   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 75: 0xd94357a8 0xbf7e8d37 0x918e6968 0x5fbc0000 0xc8bc6e23
+    32 01-14 17:00:47.090411   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 70: 0xacfe3892 0x3e987308 0x99b37482 0x92778e37 0x8d396963
+    33 01-14 17:00:47.090410   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 65: 0x968d9969 0xa858b9e5 0xacbf9b8d 0x388e73f8 0x13699d14
+    34 01-14 17:00:47.090408   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 60: 0xb9c39c94 0xdc8f9637 0x8e376873 0x9813f791 0x34508d39
+    35 01-14 17:00:47.090407   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 55: 0xbf3a938d 0x3d9123a9 0x8389e82d 0xe4703c97 0x40a563d9
+    36 01-14 17:00:47.090405   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 50: 0x35710000 0xc8bcca1f 0x00000000 0xaaaaaaaa 0xb969063f
+    37 01-14 17:00:47.090404   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 45: 0xcf97993a 0x8a3a08f3 0x9863b7ba 0xa1368d3a 0x928f2899
+    38 01-14 17:00:47.090402   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 40: 0x3a922358 0x7309a22b 0xbe283c91 0x3e97e359 0x094361b9
+    39 01-14 17:00:47.090401   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 35: 0x38f39161 0x4a698d38 0x938a89f8 0xf829e06a 0xacff8f94
+    40 01-14 17:00:47.090399   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 30: 0xf6153d9b 0x419eb3f9 0xd993508e 0x26848b39 0x8e365903
+    41 01-14 17:00:47.090398   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 25: 0xaaaa2a2a 0xa888d65c 0xaabb898c 0x3a8c13c8 0xc328a9d1
+    42 01-14 17:00:47.090375   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 20: 0x794cee70 0x011b5c79 0x9b400000 0xc8bc201a 0x00000000
+    43 01-14 17:00:47.090373   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 15: 0x00000000 0x00000000 0x00000000 0x00042100 0x00000000
+    44 01-14 17:00:47.090371   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 10: 0x000004b0 0x00000000 0x0000014d 0x00000000 0x00000001
+    45 01-14 17:00:47.090369   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  5: 0x00000000 0x794cf340 0x011b5c79 0x000003e8 0x00000000
+    46 01-14 17:00:47.090366   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  0: 0x11112222 0x00000001 0x00006d08 0x00000000 0x00000029
+    47 01-14 17:00:47.090357   10320   10362   7               DataWriter D17 do_work: datawriter: Partial(?) contents of the Fragment from link 1
+    48 01-14 17:00:47.090039   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 41 and detector type TriggerRecordHeader and apa/link number 1 / 1
+    49 01-14 17:00:47.090034   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
+    50 01-14 17:00:47.089983   10320   10362   7               DataWriter D10 do_work: datawriter: Popped the TriggerRecord for trigger number 41 off the input queue
+    51 01-14 17:00:47.072362   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 42 and detector type FELIX and apa/link number 0 / 1
+    52 01-14 17:00:47.072357   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
+    53 01-14 17:00:47.072337   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 95: 0xb7fa9394 0x3f932338 0xb3e9baa3 0xd8863b97 0x419ea339
+    54 01-14 17:00:47.072335   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 90: 0x893c48f3 0xd803a299 0x64178a3c 0x898fa849 0x69493a1e
+    55 01-14 17:00:47.072319   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 85: 0x33b89beb 0xb1be3b96 0x449a1379 0xc843e8dd 0xa0fb933e
+    56 01-14 17:00:47.072318   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 80: 0x00000000 0xaaaaaaaa 0xc9093a67 0x6f898a91 0x3a905329
+    57 01-14 17:00:47.072316   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 75: 0xd94357a8 0xbf7e8d37 0x918e6968 0x5fbc0000 0xc8bc6e23
+    58 01-14 17:00:47.072315   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 70: 0xacfe3892 0x3e987308 0x99b37482 0x92778e37 0x8d396963
+    59 01-14 17:00:47.072313   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 65: 0x968d9969 0xa858b9e5 0xacbf9b8d 0x388e73f8 0x13699d14
+    60 01-14 17:00:47.072312   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 60: 0xb9c39c94 0xdc8f9637 0x8e376873 0x9813f791 0x34508d39
+    61 01-14 17:00:47.072311   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 55: 0xbf3a938d 0x3d9123a9 0x8389e82d 0xe4703c97 0x40a563d9
+    62 01-14 17:00:47.072309   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 50: 0x35710000 0xc8bcca1f 0x00000000 0xaaaaaaaa 0xb969063f
+    63 01-14 17:00:47.072308   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 45: 0xcf97993a 0x8a3a08f3 0x9863b7ba 0xa1368d3a 0x928f2899
+    64 01-14 17:00:47.072306   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 40: 0x3a922358 0x7309a22b 0xbe283c91 0x3e97e359 0x094361b9
+    65 01-14 17:00:47.072304   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 35: 0x38f39161 0x4a698d38 0x938a89f8 0xf829e06a 0xacff8f94
+    66 01-14 17:00:47.072303   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 30: 0xf6153d9b 0x419eb3f9 0xd993508e 0x26848b39 0x8e365903
+    67 01-14 17:00:47.072285   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 25: 0xaaaa2a2a 0xa888d65c 0xaabb898c 0x3a8c13c8 0xc328a9d1
+    68 01-14 17:00:47.072283   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 20: 0x794cee70 0x011b5c79 0x9b400000 0xc8bc201a 0x00000000
+    69 01-14 17:00:47.072281   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 15: 0x00000000 0x00000000 0x00000000 0x00042100 0x00000000
+    70 01-14 17:00:47.072280   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 10: 0x000004b0 0x00000000 0x0000014d 0x00000000 0x00000001
+    71 01-14 17:00:47.072278   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  5: 0x00000000 0x794cf340 0x011b5c79 0x000003e8 0x00000000
+    72 01-14 17:00:47.072275   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  0: 0x11112222 0x00000001 0x00006d08 0x00000000 0x0000002a
+    73 01-14 17:00:47.072267   10320   10362   7               DataWriter D17 do_work: datawriter: Partial(?) contents of the Fragment from link 1
+    74 01-14 17:00:47.071952   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 42 and detector type FELIX and apa/link number 0 / 0
+    75 01-14 17:00:47.071944   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
+    76 01-14 17:00:47.071925   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 95: 0xb7fa9394 0x3f932338 0xb3e9baa3 0xd8863b97 0x419ea339
+    77 01-14 17:00:47.071924   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 90: 0x893c48f3 0xd803a299 0x64178a3c 0x898fa849 0x69493a1e
+    78 01-14 17:00:47.071923   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 85: 0x33b89beb 0xb1be3b96 0x449a1379 0xc843e8dd 0xa0fb933e
+    79 01-14 17:00:47.071921   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 80: 0x00000000 0xaaaaaaaa 0xc9093a67 0x6f898a91 0x3a905329
+    80 01-14 17:00:47.071907   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 75: 0xd94357a8 0xbf7e8d37 0x918e6968 0x5fbc0000 0xc8bc6e23
+    81 01-14 17:00:47.071906   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 70: 0xacfe3892 0x3e987308 0x99b37482 0x92778e37 0x8d396963
+    82 01-14 17:00:47.071904   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 65: 0x968d9969 0xa858b9e5 0xacbf9b8d 0x388e73f8 0x13699d14
+    83 01-14 17:00:47.071903   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 60: 0xb9c39c94 0xdc8f9637 0x8e376873 0x9813f791 0x34508d39
+    84 01-14 17:00:47.071901   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 55: 0xbf3a938d 0x3d9123a9 0x8389e82d 0xe4703c97 0x40a563d9
+    85 01-14 17:00:47.071900   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 50: 0x35710000 0xc8bcca1f 0x00000000 0xaaaaaaaa 0xb969063f
+    86 01-14 17:00:47.071898   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 45: 0xcf97993a 0x8a3a08f3 0x9863b7ba 0xa1368d3a 0x928f2899
+    87 01-14 17:00:47.071897   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 40: 0x3a922358 0x7309a22b 0xbe283c91 0x3e97e359 0x094361b9
+    88 01-14 17:00:47.071895   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 35: 0x38f39161 0x4a698d38 0x938a89f8 0xf829e06a 0xacff8f94
+    89 01-14 17:00:47.071894   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 30: 0xf6153d9b 0x419eb3f9 0xd993508e 0x26848b39 0x8e365903
+    90 01-14 17:00:47.071892   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 25: 0xaaaa2a2a 0xa888d65c 0xaabb898c 0x3a8c13c8 0xc328a9d1
+    91 01-14 17:00:47.071891   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 20: 0x794cee70 0x011b5c79 0x9b400000 0xc8bc201a 0x00000000
+    92 01-14 17:00:47.071889   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 15: 0x00000000 0x00000000 0x00000000 0x00042100 0x00000000
+    93 01-14 17:00:47.071827   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset 10: 0x000004b0 0x00000000 0x0000014d 0x00000000 0x00000000
+    94 01-14 17:00:47.071826   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  5: 0x00000000 0x794cf340 0x011b5c79 0x000003e8 0x00000000
+    95 01-14 17:00:47.071822   10320   10362   7               DataWriter D17 do_work: datawriter: 32-bit offset  0: 0x11112222 0x00000001 0x00006d08 0x00000000 0x0000002a
+    96 01-14 17:00:47.071810   10320   10362   7               DataWriter D17 do_work: datawriter: Partial(?) contents of the Fragment from link 0
+    97 01-14 17:00:47.071356   10320   10362   7            HDF5DataStore DBG write: data_store: Writing data with run number 333 and trigger number 42 and detector type TriggerRecordHeader and apa/link number 1 / 1
+    98 01-14 17:00:47.071345   10320   10362   7            HDF5DataStore DBG openFileIfNeeded: data_store: Pointer file to  ./fake_minidaqapp_run000333_file0000.hdf5 was already opened with openFlags 17
+    99 01-14 17:00:47.071284   10320   10362   7               DataWriter D10 do_work: datawriter: Popped the TriggerRecord for trigger number 42 off the input queue
   100 01-14 17:00:47.071219   10320   10365   3         FragmentReceiver D10 do_work: Trigger decision 41/333 status: 1 / 2 Fragments
   101 01-14 17:00:47.071175   10320   10365   3         FragmentReceiver D10 do_work: Trigger decision 42/333 status: 1 / 2 Fragments
   102 01-14 17:00:47.071173   10320   10365   3         FragmentReceiver D10 do_work: Trigger decision 41/333 status: 1 / 2 Fragments

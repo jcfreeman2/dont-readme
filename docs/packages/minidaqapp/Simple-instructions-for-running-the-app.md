@@ -23,17 +23,23 @@ a sample command sequence would be: `init`, `conf`, `start`, `resume`, `stop`, `
 
 The minimal set of instructions for running the app using pre-built software:
 
+
 1. create a new software area using the [instructions for dunedaq-v2.2.0](https://github.com/DUNE-DAQ/appfwk/wiki/Compiling-and-running-under-v2.2.0)
+
 
 1. cd into your work area
 
+
 1. `dbt-setup-runtime-environment`
 
+
 1. download and rename the raw data file ([CERNBox link](https://cernbox.cern.ch/index.php/s/VAqNtn7bwuQtff3/download)) and put it into ./ (if you put the data anywhere else or with a different filename you'll need to specify that location and filename when you create your configuration file in the next step)
+
 
 1. generate your configuration: 
     * `python -m minidaqapp.fake_app_confgen -d ./frames.bin -o '.' my_minidaq_config.json`
     * (the full set of available options can be seen using `python -m minidaqapp.fake_app_confgen --help`)
+
 
 1. `daq_application -c stdin://./my_minidaq_config.json`
     * a sample command sequence would be: `init, conf, start, resume, stop, scrap`.  Use &lt;ctrl-c&gt; to exit the app.
@@ -43,26 +49,35 @@ The minimal set of instructions for running the app using pre-built software:
 
 To take the next step of making changes to the code, these additional steps can be used:
 
+
 1. cd into your work area
 
+
 1. `cd sourcecode`
+
 
 1. clone the repository(ies) that you are interested in
     * e.g. `git clone https://github.com/DUNE-DAQ/dfmodules.git`
 
+
 1. `cd ..`
+
 
 1. `dbt-setup-build-environment`
 
+
 1. `dbt-build.sh --install`
+
 
 1. use the steps above to setup the runtime environment, re-generate the configuration, and run the app
 
 ### Changing the trigger rate dynamically
 
 
+
 1. In order to generate a new configuration file you can issue this command:
     * `python -m minidaqapp.fake_app_confgen -d ./frames.bin -o '.' -t <trigger_rate_hz> my_minidaq_config.json`
+
 
 1. If you wish to change rate in the course of a run, this is best done using the REST command interface for command distribution.
     * Open 2 terminals (let's assume on the same host) and go into your work area (remember to setup the runtime environment!); 

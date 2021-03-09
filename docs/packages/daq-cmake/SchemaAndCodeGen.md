@@ -4,7 +4,9 @@
 `daq-cmake` supports for schema distribution and code generation with [moo](https://github.com/brettviren/moo/)
 
 
+
 1. Schemas (jsonnet), models (jsonnet) and templates (jinjia) in the `schema/<package name>` folder are automatically copied to the installation driector and into ups products eventually.
+
 
 1. The `daq_codegen` cmake function provides a simpliefied interface to `moo render` to generate C++ files from jinjia templates. It provides a mechanism to easily import schemas, templates or models from other packages and implements an out-of-date dependency check.
 
@@ -68,7 +70,9 @@ These are its key features:
 ### Schema files
 
 
+
 1. Create the `schema/<package>` directory and move existing schema files in there
+
 
 2. Rename the schema file according to the schema path
 
@@ -77,7 +81,9 @@ e.g. `schema/appfwk-cmd-schema.jsonnet` to `schema/appfwk/cmd.jsonnet`
 ### CMakeList.txt
 
 
+
 1. Remove `SCHEMA` from `daq_add_plugin(...)` if it's used
+
 
 2. Add `daq_codegen(...)` with appropriate parameters. In most of the cases the following should work
    ```
@@ -85,6 +91,7 @@ e.g. `schema/appfwk-cmd-schema.jsonnet` to `schema/appfwk/cmd.jsonnet`
    ```
 
 ### config.cmake.in
+
 
 
 1. Add the following lines to `<pkg>Config.cmake.in`:

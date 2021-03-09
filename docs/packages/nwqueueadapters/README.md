@@ -45,9 +45,12 @@ QueueToNetworkBase* makeQToN(string plugin_name) {
 This requires a slightly more complicated configuration (we have to pass both "msg_type" and "msg_module_type"), but it decouples the name of the plugin's shared library file from the name of the sent/received class. I think this has some potential advantages:
 
 
+
 1. The fully-qualified name of the class can be specified in the config file (ie, in "msg_type")
 
+
 2. "msg_type"s that take template parameters can be specified (eg, if you wanted to wrap a `MyClass<T>`)
+
 
 3. One shared library file can service multiple classes (have the `makeQToN` function switch on `plugin_name`). This is potentially useful for `moo`-generated classes, where many classes may be generated from the same file
 
