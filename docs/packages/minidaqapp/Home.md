@@ -1,12 +1,7 @@
-# minidaqapp README
+# Home
 Welcome to the minidaqapp wiki!
 
-A MiniDAQ application to read out FELIX data and store it in HDF5 files on disk.
-The target date for a first version is January 2021.
-Potential initial customers include the MiniDAQ at Columbia, the CERN Coldbox, and the ICEBERG teststand at Fermilab.
-
-
-[MiniDAQApp Diagrams](MiniDAQApp-Diagrams.md)
+[[MiniDAQApp Diagrams|MiniDAQApp Diagrams]]
 
 ### Repository Notes
 
@@ -26,12 +21,12 @@ To help people understand/remember where the various pieces of the MiniDAQApp ar
 
 ### Developer Notes
 
-* [Simple instructions for running the app](Simple-instructions-for-running-the-app.md) (v1.0)
+* [[Simple instructions for running the app|Simple instructions for running the app]] (v1.0)
 
-* [Instructions for setting up a v2.2.0 -to- v2.4.0 development environment](Instructions-for-setting-up-a-v2.2.0--to--v2.4.0-development-environment.md)
+* [[Instructions for setting up a v2.4.0 development environment]]
 
-* [Coordination notes for v2.3.0 and v2.4.0](Coordination-notes-for-v2.3.0-and-v2.4.0.md)
+* [[Coordination notes for v2.3.0 and v2.4.0]]
 
-* [Notes from meetings and discussions](Notes-from-meetings-and-discussions.md)
+* [[Notes from meetings and discussions|Notes from meetings and discussions]]
 
-* [Reminders about tests that we want to run](Reminders-about-tests-that-we-want-to-run.md)
+* [[Reminders about tests that we want to run|Reminders about tests that we want to run]]
