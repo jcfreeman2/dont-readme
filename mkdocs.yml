@@ -2,7 +2,10 @@ site_name: DUNE DAQ Software Documentation Home
 nav:
     - Home: README.md
     - Packages:
-       - appfwk: packages/appfwk/README.md
+       - appfwk:
+          - How-to-write-your-DAQModule: packages/appfwk/How-to-write-your-DAQModule.md
+          - README: packages/appfwk/README.md
+          - Step-by-step-instructions-for-creating-your-own-DAQModule-package-under-v2.0.0: packages/appfwk/Step-by-step-instructions-for-creating-your-own-DAQModule-package-under-v2.0.0.md
        - cmdlib: packages/cmdlib/README.md
        - daq-buildtools:
           - README: packages/daq-buildtools/README.md
