@@ -21,12 +21,12 @@ To help people understand/remember where the various pieces of the MiniDAQApp ar
 
 ### Developer Notes
 
-* [[Simple instructions for running the app|Simple instructions for running the app]] (v1.0)
+* [Simple instructions for running the app](Simple-instructions-for-running-the-app.md) (v1.0)
 
-* [[Instructions for setting up a v2.4.0 development environment]]
+* [Instructions for setting up a v2.4.0 development environment](Instructions-for-setting-up-a-v2.4.0-development-environment.md)
 
-* [[Coordination notes for v2.3.0 and v2.4.0]]
+* [Coordination notes for v2.3.0 and v2.4.0](Coordination-notes-for-v2.3.0-and-v2.4.0.md)
 
-* [[Notes from meetings and discussions|Notes from meetings and discussions]]
+* [Notes from meetings and discussions](Notes-from-meetings-and-discussions.md)
 
-* [[Reminders about tests that we want to run|Reminders about tests that we want to run]]
+* [Reminders about tests that we want to run](Reminders-about-tests-that-we-want-to-run.md)
