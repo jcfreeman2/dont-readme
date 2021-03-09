@@ -4,6 +4,8 @@ To learn how to build an existing software package repo, take a look at the [daq
 
 To learn how to create a new package or modify the build of an existing one, take a look at the [daq-cmake documentation](packages/daq-buildtools/README.md)
 
+To learn about the standard development workflow, take a look [here](development_workflow_gitflow.md)
+
 To read the documentation for other packages, please click on one of the links below:
 
 [appfwk](packages/appfwk/README.md) _home of_ daq_application _and tools for writing DAQModules_
