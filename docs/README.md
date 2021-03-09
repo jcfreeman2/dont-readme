@@ -18,6 +18,8 @@ To read the documentation for other packages, please click on one of the links b
 
 [daqdemos](packages/daqdemos/README.md) _demo modules and examples for DAQ applications_
 
+[daq-release](packages/daq-release/README.md) _manifest files for DUNE DAQ releases_
+
 [dataformats](packages/dataformats/README.md) _raw data reinterpretation utilities_
 
 [dfmessages](packages/dfmessages/README.md) _dataflow messages_
