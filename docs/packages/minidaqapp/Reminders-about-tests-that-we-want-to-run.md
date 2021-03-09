@@ -3,7 +3,11 @@
 ### Minidaqapp
 
 * Generate a configuration using the python module minidaqapp.fake_app_confgen (default params) and test the following:
+
+
 1. Application runs through all states and supports also stop/start scrap/conf;
+
+
 1. The tests of dunedaq-v2.2.0 pass successfully.
 
 
