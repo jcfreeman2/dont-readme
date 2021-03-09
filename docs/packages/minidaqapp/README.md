@@ -1,7 +1,7 @@
 # Home
 Welcome to the minidaqapp wiki!
 
-[[MiniDAQApp Diagrams|MiniDAQApp Diagrams]]
+[MiniDAQApp Diagrams](MiniDAQApp-Diagrams.md)
 
 ### Repository Notes
 
