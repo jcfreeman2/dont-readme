@@ -47,6 +47,8 @@ nav:
        - readout: packages/readout/README.md
        - restcmd: packages/restcmd/README.md
        - serialization: packages/serialization/README.md
+       - styleguide:
+          - README: packages/styleguide/README.md
        - trigemu: packages/trigemu/README.md
 
 theme: mkdocs
