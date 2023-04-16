@@ -14,4 +14,4 @@ jobs:
       - run: |
             pwd
             ls
-            go run hello-world.go
+            go run helloworld.go
