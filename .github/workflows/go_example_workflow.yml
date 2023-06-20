@@ -19,5 +19,5 @@ jobs:
         run: |
             pwd
             ls
-            source ./sourceme.sh
+            . ./sourceme.sh
             go run helloworld.go
