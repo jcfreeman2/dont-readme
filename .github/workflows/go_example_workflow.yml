@@ -18,6 +18,6 @@ jobs:
       - name: A couple of commands, culminating in Go helloworld
         run: |
             pwd
-            source sourceme.sh
             ls
+            source ./sourceme.sh
             go run helloworld.go
