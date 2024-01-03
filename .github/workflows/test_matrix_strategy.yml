@@ -5,17 +5,18 @@ on:
     branches:
       - main
       - master
-
 jobs:
   johnsjob:
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        var1: [val1, val3]
-        var2: [val2, val4]
-
-    runs-on: ubuntu-latest
+        include:
+          - var1: val1
+            var2: val2
+          - var1: val3
+            var2: val4
 
     steps:
     - name: Run Job
       run: echo "var1=${{ matrix.var1 }} var2=${{ matrix.var2 }}"
-
