@@ -1,0 +1,21 @@
+name: JohnsJobWorkflow
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  johnsjob:
+    strategy:
+      matrix:
+        var1: [val1, val3]
+        var2: [val2, val4]
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run Job
+      run: echo "var1=${{ matrix.var1 }} var2=${{ matrix.var2 }}"
+
