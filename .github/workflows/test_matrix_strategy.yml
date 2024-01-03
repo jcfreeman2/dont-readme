@@ -16,6 +16,8 @@ jobs:
             var2: val2
           - var1: val3
             var2: val4
+          - var1: val5
+            var2: val6
 
     steps:
     - name: Run Job
